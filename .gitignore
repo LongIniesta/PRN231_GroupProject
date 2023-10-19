@@ -1,0 +1,7 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs/prn231_catdogloverplatform/v17
+/BE_PRN231_CatDogLover/.vs/BE_PRN231_CatDogLover/FileContentIndex
+/.gitignore
