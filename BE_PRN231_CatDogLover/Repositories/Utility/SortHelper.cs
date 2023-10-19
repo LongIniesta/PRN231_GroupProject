@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DTOs.Account
+namespace Repositories.Utility
 {
-    internal class SearchAccountRequest
+    public class SortHelper
     {
     }
 }

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using BusinessObjects;
 using DTOs;
+using DTOs.Account;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,9 @@ namespace AutoMapping
             CreateMap<Role, RoleDTO>().ReverseMap();
             CreateMap<Account, RegisterRequest>().ReverseMap();
             CreateMap<AccountDTO, RegisterRequest>().ReverseMap();
+            
+            //Hiep
+            CreateMap<AccountUpdateProfileRequest, Account>().ReverseMap();
         }
     }
 }
