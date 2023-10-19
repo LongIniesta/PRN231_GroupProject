@@ -1,7 +1,12 @@
 using AutoMapping;
+using BusinessObjects;
+using DTOs;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.OData;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OData.Edm;
+using Microsoft.OData.ModelBuilder;
 using Microsoft.OpenApi.Models;
 using System.Text;
 
@@ -71,6 +76,22 @@ builder.Services.AddAuthentication(options =>
 });
 builder.Services.AddAutoMapper
 (typeof(AutoMapperProfile).Assembly);
+
+static IEdmModel GetEdmModel()
+{
+    ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
+    builder.EntitySet<CategoryDTO>("Categories");
+    return builder.GetEdmModel();
+}
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("AdminOrStaff", policy =>
+    {
+        policy.RequireRole("admin", "staff");
+    });
+});
+
+builder.Services.AddControllers().AddOData(option => option.Select().Filter().Count().OrderBy().Expand().SetMaxTop(100).AddRouteComponents("odata", GetEdmModel()));
 
 var app = builder.Build();
 

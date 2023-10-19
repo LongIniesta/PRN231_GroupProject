@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "b8I2+eDWK7ritL/6ocL52PxKV5CGLiiF8r0DkSVwZnFe7Mchtv4KyxONVlJh/CshxOT6MZ73LaHntmRgdA5W9w==",
+  "dgSpecHash": "3HOveVgsRHx2YnLvM8KV81rwy/8Ms28FqeYnCeRTqemg4vY6ira3jXmCS23kD8+FBC76jaLrCg4hcgqJZCidVA==",
   "success": true,
-  "projectFilePath": "D:\\FA23\\PRN231\\BE_PRN231_CatDogLover\\AutoMapping\\AutoMapping.csproj",
+  "projectFilePath": "D:\\FA23\\PRN231\\PRN231_GroupProject\\BE_PRN231_CatDogLover\\AutoMapping\\AutoMapping.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\baolo\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\baolo\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",

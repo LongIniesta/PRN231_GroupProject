@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "SPjNV3M8sBRVw6hy5flG6eziTXavFPSvZCPJBuJtwAaTnX7oLzai+VNolKqMip/unA9JeaihwzL7y9VQHQzTKg==",
+  "dgSpecHash": "RYrVIMAC5PC5rgMpB6V/mi7Hn5JHff8sHHSA34ILBI7YBeed+EMfFbhmL+Ay1juU9ns+8s4nLD4U9PnePMeXBA==",
   "success": true,
-  "projectFilePath": "D:\\FA23\\PRN231\\BE_PRN231_CatDogLover\\Repositories\\Repositories.csproj",
+  "projectFilePath": "D:\\FA23\\PRN231\\PRN231_GroupProject\\BE_PRN231_CatDogLover\\Repositories\\Repositories.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\baolo\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
     "C:\\Users\\baolo\\.nuget\\packages\\microsoft.data.sqlclient\\2.1.4\\microsoft.data.sqlclient.2.1.4.nupkg.sha512",

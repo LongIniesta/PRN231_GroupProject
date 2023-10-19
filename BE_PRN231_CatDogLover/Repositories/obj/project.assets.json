@@ -2322,11 +2322,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\FA23\\PRN231\\BE_PRN231_CatDogLover\\Repositories\\Repositories.csproj",
+      "projectUniqueName": "D:\\FA23\\PRN231\\PRN231_GroupProject\\BE_PRN231_CatDogLover\\Repositories\\Repositories.csproj",
       "projectName": "Repositories",
-      "projectPath": "D:\\FA23\\PRN231\\BE_PRN231_CatDogLover\\Repositories\\Repositories.csproj",
+      "projectPath": "D:\\FA23\\PRN231\\PRN231_GroupProject\\BE_PRN231_CatDogLover\\Repositories\\Repositories.csproj",
       "packagesPath": "C:\\Users\\baolo\\.nuget\\packages\\",
-      "outputPath": "D:\\FA23\\PRN231\\BE_PRN231_CatDogLover\\Repositories\\obj\\",
+      "outputPath": "D:\\FA23\\PRN231\\PRN231_GroupProject\\BE_PRN231_CatDogLover\\Repositories\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -2347,11 +2347,11 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "D:\\FA23\\PRN231\\BE_PRN231_CatDogLover\\BusinessObjects\\BusinessObjects.csproj": {
-              "projectPath": "D:\\FA23\\PRN231\\BE_PRN231_CatDogLover\\BusinessObjects\\BusinessObjects.csproj"
+            "D:\\FA23\\PRN231\\PRN231_GroupProject\\BE_PRN231_CatDogLover\\BusinessObjects\\BusinessObjects.csproj": {
+              "projectPath": "D:\\FA23\\PRN231\\PRN231_GroupProject\\BE_PRN231_CatDogLover\\BusinessObjects\\BusinessObjects.csproj"
             },
-            "D:\\FA23\\PRN231\\BE_PRN231_CatDogLover\\DataAccess\\DataAccess.csproj": {
-              "projectPath": "D:\\FA23\\PRN231\\BE_PRN231_CatDogLover\\DataAccess\\DataAccess.csproj"
+            "D:\\FA23\\PRN231\\PRN231_GroupProject\\BE_PRN231_CatDogLover\\DataAccess\\DataAccess.csproj": {
+              "projectPath": "D:\\FA23\\PRN231\\PRN231_GroupProject\\BE_PRN231_CatDogLover\\DataAccess\\DataAccess.csproj"
             }
           }
         }

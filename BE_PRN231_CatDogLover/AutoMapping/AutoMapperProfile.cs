@@ -17,6 +17,7 @@ namespace AutoMapping
             CreateMap<Role, RoleDTO>().ReverseMap();
             CreateMap<Account, RegisterRequest>().ReverseMap();
             CreateMap<AccountDTO, RegisterRequest>().ReverseMap();
+            CreateMap<Category, CategoryDTO>().ReverseMap();
         }
     }
 }

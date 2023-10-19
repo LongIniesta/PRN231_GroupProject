@@ -1,4 +1,6 @@
-﻿using Repositories.Interface;
+﻿using BusinessObjects;
+using DataAccess;
+using Repositories.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,5 +11,14 @@ namespace Repositories
 {
     public class ServiceSchedulerRepository : IServiceSchedulerRepository
     {
+        public ServiceScheduler AddServiceScheduler(ServiceScheduler ServiceScheduler) => ServiceSchedulerDAO.Instance.AddServiceScheduler(ServiceScheduler);
+
+        public IEnumerable<ServiceScheduler> GetAll() => ServiceSchedulerDAO.Instance.GetAll(); 
+
+        public ServiceScheduler GetByID(string id, DateTime startDate) => ServiceSchedulerDAO.Instance.GetByID(id, startDate);
+
+        public ServiceScheduler RemoveServiceScheduler(string id, DateTime startDate) => ServiceSchedulerDAO.Instance.RemoveServiceScheduler(id, startDate);
+
+        public ServiceScheduler UpdateServiceScheduler(ServiceScheduler ServiceScheduler) => ServiceSchedulerDAO.Instance.UpdateServiceScheduler(ServiceScheduler);
     }
 }
