@@ -1,4 +1,5 @@
 ﻿using BusinessObjects;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,6 +42,18 @@ namespace DataAccess
             return result;
         }
 
+        private string getNewId() {
+            string result = "IT";
+            var DBContext = new CatDogLoverContext();
+            if (DBContext.Items.Count() <= 0) result += "1";
+            else
+            {
+                List<string> Test = DBContext.Items.Select(i => i.ItemId).ToList();
+                int max = Test.Max(u => int.Parse(u.Substring(2, u.Length - 2))) + 1;
+                result += max.ToString();
+            }
+            return result;
+        }
 
         public Item AddItem(Item Item)
         {
@@ -48,6 +61,9 @@ namespace DataAccess
             try
             {
                 var DBContext = new CatDogLoverContext();
+                Item.ItemId = getNewId();
+                Item.Products = null;
+                Item.ServiceSchedulers = null;
                 result = DBContext.Items.Add(Item).Entity;
                 DBContext.SaveChanges();
             }

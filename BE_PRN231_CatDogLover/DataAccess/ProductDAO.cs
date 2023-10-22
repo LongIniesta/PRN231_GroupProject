@@ -40,7 +40,19 @@ namespace DataAccess
             }
             return result;
         }
-
+        private string getNewId()
+        {
+            string result = "PD";
+            var DBContext = new CatDogLoverContext();
+            if (DBContext.Products.Count() <= 0) result += "1";
+            else
+            {
+                List<string> Test = DBContext.Products.Select(i => i.ProductId).ToList();
+                int max = Test.Max(u => int.Parse(u.Substring(2, u.Length - 2))) + 1;
+                result += max.ToString();
+            }
+            return result;
+        }
 
         public Product AddProduct(Product Product)
         {
@@ -48,6 +60,7 @@ namespace DataAccess
             try
             {
                 var DBContext = new CatDogLoverContext();
+                Product.ProductId = getNewId();
                 result = DBContext.Products.Add(Product).Entity;
                 DBContext.SaveChanges();
             }

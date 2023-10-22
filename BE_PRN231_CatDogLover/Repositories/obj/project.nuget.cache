@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "RYrVIMAC5PC5rgMpB6V/mi7Hn5JHff8sHHSA34ILBI7YBeed+EMfFbhmL+Ay1juU9ns+8s4nLD4U9PnePMeXBA==",
+  "dgSpecHash": "67IMNm6N/8acf1yoV8r9fMgZ910ksK9EwXFtEUMxVsg8vl6JmXQWzDzq0oansHgXASPR6semq4r+CQikEWPH3g==",
   "success": true,
   "projectFilePath": "D:\\FA23\\PRN231\\PRN231_GroupProject\\BE_PRN231_CatDogLover\\Repositories\\Repositories.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\baolo\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
+    "C:\\Users\\baolo\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
+    "C:\\Users\\baolo\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\baolo\\.nuget\\packages\\microsoft.data.sqlclient\\2.1.4\\microsoft.data.sqlclient.2.1.4.nupkg.sha512",
     "C:\\Users\\baolo\\.nuget\\packages\\microsoft.data.sqlclient.sni.runtime\\2.1.1\\microsoft.data.sqlclient.sni.runtime.2.1.1.nupkg.sha512",
     "C:\\Users\\baolo\\.nuget\\packages\\microsoft.entityframeworkcore\\6.0.23\\microsoft.entityframeworkcore.6.0.23.nupkg.sha512",

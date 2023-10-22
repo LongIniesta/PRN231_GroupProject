@@ -41,13 +41,26 @@ namespace DataAccess
             return result;
         }
 
-
+        private string getNewId()
+        {
+            string result = "GF";
+            var DBContext = new CatDogLoverContext();
+            if (DBContext.Gifts.Count() <= 0) result += "1";
+            else
+            {
+                List<string> Test = DBContext.Gifts.Select(i => i.GiftId).ToList();
+                int max = Test.Max(u => int.Parse(u.Substring(2, u.Length - 2))) + 1;
+                result += max.ToString();
+            }
+            return result;
+        }
         public Gift AddGift(Gift Gift)
         {
             Gift result;
             try
             {
                 var DBContext = new CatDogLoverContext();
+                Gift.GiftId = getNewId();
                 result = DBContext.Gifts.Add(Gift).Entity;
                 DBContext.SaveChanges();
             }

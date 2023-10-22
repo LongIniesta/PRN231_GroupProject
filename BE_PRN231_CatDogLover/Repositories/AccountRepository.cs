@@ -38,5 +38,10 @@ namespace Repositories
         }
 
         public Account GetById(int id) => AccountDAO.Instance.GetByID(id);
+
+        public AccountDTO UpdateAccount(AccountUpdateProfileRequest updateProfileRequest)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

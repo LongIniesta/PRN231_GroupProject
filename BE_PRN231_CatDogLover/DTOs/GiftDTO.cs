@@ -15,6 +15,6 @@ namespace DTOs
         public string? ImageLink { get; set; }
         public bool Status { get; set; }
 
-        public virtual ICollection<GiftCommentDTO> GiftComments { get; set; }
+        public virtual ICollection<GiftCommentDTO>? GiftComments { get; set; }
     }
 }

@@ -18,6 +18,6 @@ namespace DTOs
         public int CategoryId { get; set; }
         public bool Status { get; set; }
 
-        public virtual CategoryDTO Category { get; set; } = null!;
+        public virtual CategoryDTO? Category { get; set; } = null!;
     }
 }

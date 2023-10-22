@@ -48,6 +48,10 @@ namespace DataAccess
             try
             {
                 var DBContext = new CatDogLoverContext();
+                Post.Owner = null;
+                Post.Products = null;
+                Post.Services = null;
+                Post.Gifts = null;
                 result = DBContext.Posts.Add(Post).Entity;
                 DBContext.SaveChanges();
             }

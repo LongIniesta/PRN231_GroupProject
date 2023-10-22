@@ -11,7 +11,11 @@ namespace Repositories
 {
     public class ServiceSchedulerRepository : IServiceSchedulerRepository
     {
-        public ServiceScheduler AddServiceScheduler(ServiceScheduler ServiceScheduler) => ServiceSchedulerDAO.Instance.AddServiceScheduler(ServiceScheduler);
+        public ServiceScheduler AddServiceScheduler(ServiceScheduler ServiceScheduler) {
+            string ItemId = ItemDAO.Instance.AddItem(new Item { ItemType = "scheduler" }).ItemId;
+            ServiceScheduler.ItemId = ItemId;
+            return ServiceSchedulerDAO.Instance.AddServiceScheduler(ServiceScheduler);
+        }
 
         public IEnumerable<ServiceScheduler> GetAll() => ServiceSchedulerDAO.Instance.GetAll(); 
 

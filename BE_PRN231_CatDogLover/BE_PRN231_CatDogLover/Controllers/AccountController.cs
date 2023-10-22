@@ -52,7 +52,7 @@ namespace BE_PRN231_CatDogLover.Controllers
                 return BadRequest(ex.Message);
             }
         }
-
+/*
         [AllowAnonymous]
         [HttpPut]
         public IActionResult UpdateAsync([FromForm] AccountUpdateProfileRequest updateRequest)
@@ -73,6 +73,6 @@ namespace BE_PRN231_CatDogLover.Controllers
             }
 
             return Ok();
-        }
+        }*/
     }
 }

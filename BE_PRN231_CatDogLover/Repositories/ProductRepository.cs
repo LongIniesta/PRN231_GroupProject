@@ -11,7 +11,11 @@ namespace Repositories
 {
     public class ProductRepository : IProductRepository
     {
-        public Product AddProduct(Product Product) => ProductDAO.Instance.AddProduct(Product);
+        public Product AddProduct(Product Product) {
+            string ItemId = ItemDAO.Instance.AddItem(new Item { ItemType = "product" }).ItemId;
+            Product.ItemId = ItemId;
+           return ProductDAO.Instance.AddProduct(Product);
+        }
 
         public IEnumerable<Product> GetAll() => ProductDAO.Instance.GetAll();   
 

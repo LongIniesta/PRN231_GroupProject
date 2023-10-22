@@ -19,7 +19,12 @@ namespace AutoMapping
             CreateMap<Account, RegisterRequest>().ReverseMap();
             CreateMap<AccountDTO, RegisterRequest>().ReverseMap();
             CreateMap<Category, CategoryDTO>().ReverseMap();
-            
+            CreateMap<Post, PostDTO>().ReverseMap();
+            CreateMap<Product, ProductDTO>().ReverseMap();
+            CreateMap<Gift, GiftDTO>().ReverseMap();
+            CreateMap<Service, ServiceDTO>().ReverseMap();
+            CreateMap<ServiceScheduler, ServiceSchedulerDTO>().ReverseMap();
+
             //Hiep
             CreateMap<AccountUpdateProfileRequest, Account>().ReverseMap();
         }

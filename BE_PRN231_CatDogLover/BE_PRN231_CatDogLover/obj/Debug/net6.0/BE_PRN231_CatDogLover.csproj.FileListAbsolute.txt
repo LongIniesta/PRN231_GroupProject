@@ -154,3 +154,7 @@ D:\FA23\PRN231\PRN231_GroupProject\BE_PRN231_CatDogLover\BE_PRN231_CatDogLover\o
 D:\FA23\PRN231\PRN231_GroupProject\BE_PRN231_CatDogLover\BE_PRN231_CatDogLover\obj\Debug\net6.0\BE_PRN231_CatDogLover.pdb
 D:\FA23\PRN231\PRN231_GroupProject\BE_PRN231_CatDogLover\BE_PRN231_CatDogLover\obj\Debug\net6.0\BE_PRN231_CatDogLover.genruntimeconfig.cache
 D:\FA23\PRN231\PRN231_GroupProject\BE_PRN231_CatDogLover\BE_PRN231_CatDogLover\obj\Debug\net6.0\ref\BE_PRN231_CatDogLover.dll
+D:\FA23\PRN231\PRN231_GroupProject\BE_PRN231_CatDogLover\BE_PRN231_CatDogLover\bin\Debug\net6.0\Firebase.Auth.dll
+D:\FA23\PRN231\PRN231_GroupProject\BE_PRN231_CatDogLover\BE_PRN231_CatDogLover\bin\Debug\net6.0\Firebase.Storage.dll
+D:\FA23\PRN231\PRN231_GroupProject\BE_PRN231_CatDogLover\BE_PRN231_CatDogLover\bin\Debug\net6.0\System.ServiceModel.dll
+D:\FA23\PRN231\PRN231_GroupProject\BE_PRN231_CatDogLover\BE_PRN231_CatDogLover\bin\Debug\net6.0\Newtonsoft.Json.dll

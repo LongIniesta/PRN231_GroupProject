@@ -40,7 +40,19 @@ namespace DataAccess
             }
             return result;
         }
-
+        private string getNewId()
+        {
+            string result = "SV";
+            var DBContext = new CatDogLoverContext();
+            if (DBContext.Services.Count() <= 0) result += "1";
+            else
+            {
+                List<string> Test = DBContext.Services.Select(i => i.ServiceId).ToList();
+                int max = Test.Max(u => int.Parse(u.Substring(2, u.Length - 2))) + 1;
+                result += max.ToString();
+            }
+            return result;
+        }
 
         public Service AddService(Service Service)
         {
@@ -48,6 +60,8 @@ namespace DataAccess
             try
             {
                 var DBContext = new CatDogLoverContext();
+                Service.ServiceId = getNewId();
+                Service.ServiceSchedulers = null;
                 result = DBContext.Services.Add(Service).Entity;
                 DBContext.SaveChanges();
             }
