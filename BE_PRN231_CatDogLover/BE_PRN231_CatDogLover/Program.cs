@@ -76,13 +76,6 @@ builder.Services.AddAuthentication(options =>
 });
 builder.Services.AddAutoMapper
 (typeof(AutoMapperProfile).Assembly);
-
-static IEdmModel GetEdmModel()
-{
-    ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
-    builder.EntitySet<CategoryDTO>("Categories");
-    return builder.GetEdmModel();
-}
 builder.Services.AddAuthorization(options =>
 {
     options.AddPolicy("AdminOrStaff", policy =>
@@ -91,7 +84,6 @@ builder.Services.AddAuthorization(options =>
     });
 });
 
-builder.Services.AddControllers().AddOData(option => option.Select().Filter().Count().OrderBy().Expand().SetMaxTop(100).AddRouteComponents("odata", GetEdmModel()));
 
 var app = builder.Build();
 
