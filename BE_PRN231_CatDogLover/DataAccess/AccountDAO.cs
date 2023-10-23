@@ -27,21 +27,20 @@ namespace DataAccess
                 }
             }
         }
-        public Account GetByID(int id)
+        public async Task<Account> GetByID(int id)
         {
-            Account result = null;
             try
             {
+                Account? result = null;
                 var DBContext = new CatDogLoverContext();
-                result = DBContext.Accounts.SingleOrDefault(u => u.AccountId == id);
+                result = await DBContext.Accounts.FirstOrDefaultAsync(u => u.AccountId == id);
+                return result != null ? result : throw new Exception("Not found account!");
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
-            return result;
         }
-
 
         public Account AddAccount(Account Account)
         {
@@ -59,15 +58,15 @@ namespace DataAccess
             return result;
         }
 
-        public Account RemoveAccount(int id)
+        public async Task<Account> RemoveAccount(int id)
         {
             Account result;
-            Account Account = GetByID(id);
+            Account Account = await GetByID(id);
             try
             {
                 var DBContext = new CatDogLoverContext();
                 result = DBContext.Accounts.Remove(Account).Entity;
-                DBContext.SaveChanges();
+                await DBContext.SaveChangesAsync();
             }
             catch (Exception ex)
             {
@@ -75,14 +74,14 @@ namespace DataAccess
             }
             return result;
         }
-        public Account UpdateAccount(Account Account)
+        public async Task<Account> UpdateAccount(Account Account)
         {
             Account result;
             try
             {
                 var DBContext = new CatDogLoverContext();
                 result = DBContext.Accounts.Update(Account).Entity;
-                DBContext.SaveChanges();
+                await DBContext.SaveChangesAsync();
             }
             catch (Exception ex)
             {

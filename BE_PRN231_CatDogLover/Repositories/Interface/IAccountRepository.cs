@@ -12,10 +12,15 @@ namespace Repositories.Interface
     public interface IAccountRepository
     {
         Account AddAccount(Account account);
-        Account RemoveAccount(int id);
-        AccountDTO UpdateAccount(AccountUpdateProfileRequest updateProfileRequest);
+        Task<Account> RemoveAccount(int id);
+        Task<Account> GetAccountById(int id);
+        Task<Account> UpdateAccount(Account account);
         IEnumerable<Account> GetAll();
         IQueryable<Account> Search(AccountSearchRequest searchRequest);
-        Account GetById(int id);
+        Task BanAccountAsync(int id, string reason);
+        Task UnbanAccountAsync(int id);
+        Task ResetPasswordAsync(int id, string currentPassword, string newPassword);
+        Task ForgetPasswordAsync(int id);
+
     }
 }
