@@ -2,13 +2,9 @@
 using DataAccess;
 using DTOs.Account;
 using Repositories.Interface;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Repositories.Utility;
-using DTOs;
+using System.Net;
+using System.Net.Mail;
 
 namespace Repositories
 {
@@ -18,17 +14,37 @@ namespace Repositories
 
         public IEnumerable<Account> GetAll() => AccountDAO.Instance.GetAll();
 
-        public Account RemoveAccount(int id) => AccountDAO.Instance.RemoveAccount(id);
+        public async Task<Account> RemoveAccount(int id) => await AccountDAO.Instance.RemoveAccount(id);
 
-        public AccountDTO UpdateAccount(Account account)
+        public async Task<Account> GetAccountById(int id)
         {
-            var result = AccountDAO.Instance.UpdateAccount(account);
-            return null;
+            try
+            {
+                var account = await AccountDAO.Instance.GetByID(id);
+                return account;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public async Task<Account> UpdateAccount(Account account)
+        {
+            try
+            {
+                var res = await AccountDAO.Instance.UpdateAccount(account);
+                return res;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         public IQueryable<Account> Search(AccountSearchRequest searchRequest)
         {
-         
+
             var query = AccountDAO.Instance.GetAll().AsQueryable();
             // Apply search
             query = query.GetWithSearch(searchRequest).AsQueryable();
@@ -37,11 +53,117 @@ namespace Repositories
             return query;
         }
 
-        public Account GetById(int id) => AccountDAO.Instance.GetByID(id);
-
-        public AccountDTO UpdateAccount(AccountUpdateProfileRequest updateProfileRequest)
+        public async Task BanAccountAsync(int id, string reason)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var account = await AccountDAO.Instance.GetByID(id);
+                if (account.Status)
+                {
+                    account.Status = false;
+                    account.BanReason = reason;
+                    await AccountDAO.Instance.UpdateAccount(account);
+                    SendBanNotificationEmail(account.Email, reason, "BAN_REASON");
+                }
+                else throw new Exception("Account has already been banned!");
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public async Task UnbanAccountAsync(int id)
+        {
+            try
+            {
+                var account = await AccountDAO.Instance.GetByID(id);
+                if (!account.Status)
+                {
+                    account.Status = true;
+                    await AccountDAO.Instance.UpdateAccount(account);
+                }
+                else
+                {
+                    throw new Exception("Account has already been unbanned!");
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+        }
+
+        private void SendBanNotificationEmail(string email, string content, string emailType)
+        {
+            var smtpClient = new SmtpClient("smtp.gmail.com")
+            {
+                Port = 587,
+                Credentials = new NetworkCredential("hiep.bh.02@gmail.com", "bfmw yomx vhld lokz"),
+                EnableSsl = true,
+            };
+
+            MailMessage mailMessage;
+            switch (emailType)
+            {
+                case "BAN_REASON":
+                    mailMessage = new MailMessage
+                    {
+                        From = new MailAddress("hiep.bh.02@gmail.com"),
+                        Subject = "Banned account",
+                        Body = $"Due to {content},"
+                            + $"<div>Your account on 'Cat Dog Platform' has been banned❗</div> "
+                            + $"<div>If you have any question on this decision, please contact via this email.</div>",
+                        IsBodyHtml = true,
+                    };
+                    break;
+                case "FORGET_PASSWORD":
+                    mailMessage = new MailMessage
+                    {
+                        From = new MailAddress("hiep.bh.02@gmail.com"),
+                        Subject = "Forget Password",
+                        Body = $"Hello,"
+                            + $"<div>Your current password on 'Cat Dog Platform' is <h1>{content}</h1></div> ",
+                        IsBodyHtml = true,
+                    };
+                    break;
+                default:
+                    mailMessage = new MailMessage();
+                    break;
+            }
+            mailMessage.To.Add(email);
+            smtpClient.Send(mailMessage);
+        }
+
+        public async Task ResetPasswordAsync(int id, string currentPassword, string newPassword)
+        {
+            try
+            {
+                var account = await AccountDAO.Instance.GetByID(id);
+                if (!account.Password.Equals(currentPassword)) throw new Exception("Current password's not correct❗");
+                if (currentPassword.Equals(newPassword)) throw new Exception("Current paasword's equal with new password❗");
+                account.Password = newPassword;
+                await AccountDAO.Instance.UpdateAccount(account);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public async Task ForgetPasswordAsync(int id)
+        {
+            try
+            {
+                var account = await AccountDAO.Instance.GetByID(id);
+
+                SendBanNotificationEmail(account.Email, account.Password, "FORGET_PASSWORD");
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
     }
 }

@@ -7,12 +7,15 @@ using DTOs.Account;
 using DTOs;
 using Microsoft.AspNetCore.Authorization;
 using BusinessObjects;
+using Microsoft.AspNetCore.OData.Routing.Controllers;
+using Microsoft.AspNetCore.OData.Query;
+using System.Security.Claims;
 
 namespace BE_PRN231_CatDogLover.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AccountController : ControllerBase
+    public class AccountController : ODataController
     {
         private readonly IConfiguration Configuration;
         private readonly IMapper _mapper;
@@ -20,59 +23,124 @@ namespace BE_PRN231_CatDogLover.Controllers
         public AccountController(IConfiguration configuration, IMapper mapper)
         {
             Configuration = configuration;
-            this._mapper = mapper;
+            _mapper = mapper;
             _accountRepository = new AccountRepository();
         }
 
+        //[AllowAnonymous]
+        //[HttpGet]
+        //[EnableQuery]
+        //public IActionResult Get([FromQuery] AccountSearchRequest searchRequest)
+        //{
+        //    try
+        //    {
+        //        var response = _mapper.ProjectTo<AccountDTO>(_accountRepository.Search(searchRequest));
+        //        return Ok(response);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return BadRequest(ex.Message);
+        //    }
+        //}
+
         [AllowAnonymous]
         [HttpGet]
-        public IActionResult Get([FromQuery] AccountSearchRequest searchRequest)
+        [EnableQuery]
+        public ActionResult<List<AccountDTO>> GetAccounts()
         {
             try
             {
-                var response = _mapper.ProjectTo<AccountDTO>(_accountRepository.Search(searchRequest));
-                return Ok(response);
+                List<Account> result = _accountRepository.GetAll().ToList();
+                return _mapper.Map<List<AccountDTO>>(result);
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                return new BadRequestObjectResult(ex.Message);
+            }
+        }
+
+        [Authorize(Policy = "AdminOrStaff")]
+        [HttpDelete("Ban")]
+        public async Task<ActionResult<string>> Ban([FromQuery] int id, string reason)
+        {
+            try
+            {
+                await _accountRepository.BanAccountAsync(id, reason);
+
+                return "Banned!";
+            }
+            catch (Exception ex)
+            {
+                return new BadRequestObjectResult(ex.Message);
+            }
+        }
+
+        [Authorize(Policy = "AdminOrStaff")]
+        [HttpPut("Unban")]
+        public async Task<ActionResult<string>> Unban([FromQuery] int id)
+        {
+            try
+            {
+                await _accountRepository.UnbanAccountAsync(id);
+
+                return "Unbanned!";
+            }
+            catch (Exception ex)
+            {
+                return new BadRequestObjectResult(ex.Message);
             }
         }
 
         [AllowAnonymous]
-        [HttpGet("{id}")]
-        public IActionResult GetOne(int id)
+        [HttpPut("UpdateProfile")]
+        public async Task<ActionResult<AccountDTO>> Update([FromForm] AccountUpdateProfileRequest updateRequest)
         {
             try
             {
-                return Ok(_mapper.Map<AccountDTO>(_accountRepository.GetById(id)));
+                var acc = await _accountRepository.GetAccountById(updateRequest.AccountId);
+
+                acc = _mapper.Map(updateRequest, acc);
+
+                var result = await _accountRepository.UpdateAccount(acc);
+
+                return _mapper.Map<AccountDTO>(result);
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                return new BadRequestObjectResult(ex.Message);
             }
         }
-/*
-        [AllowAnonymous]
-        [HttpPut]
-        public IActionResult UpdateAsync([FromForm] AccountUpdateProfileRequest updateRequest)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
 
+        [AllowAnonymous]
+        [HttpPut("ResetPassword")]
+        public async Task<ActionResult<string>> ResetPassword(AccountResetPassword request)
+        {
             try
             {
-                var updateAccount = _mapper.Map<Account>(updateRequest);
-                 _accountRepository.UpdateAccount(updateAccount);
+                await _accountRepository.ResetPasswordAsync(request.AccountId, request.CurrentPassword, request.NewPassword);
+
+                return "Reset Password successfully!";
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                return new BadRequestObjectResult(ex.Message);
             }
+        }
 
-            return Ok();
-        }*/
+        [AllowAnonymous]
+        [HttpPut("ForgetPassword")]
+        public async Task<ActionResult<string>> ForgetPassword(int id)
+        {
+            try
+            {
+                await _accountRepository.ForgetPasswordAsync(id);
+
+                return "A mail with your password has been sent! Please check it out!";
+            }
+            catch (Exception ex)
+            {
+                return new BadRequestObjectResult(ex.Message);
+            }
+        }
     }
 }

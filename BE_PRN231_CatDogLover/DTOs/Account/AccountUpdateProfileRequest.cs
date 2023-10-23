@@ -9,15 +9,13 @@ namespace DTOs.Account
 {
     public class AccountUpdateProfileRequest
     {
-        [Required(ErrorMessage = "Book id is required")]
+        [Required(ErrorMessage = "Account id is required")]
         public int AccountId { get; set; }
+        [Required(ErrorMessage = "Email is required")]
         [EmailAddress(ErrorMessage = "Invalid email syntax")]
-        public string? Email { get; set; } = null!;
-        public string? CurrentPassword { get; set; }
-        [Range(8, 50, ErrorMessage = "The length of new password must be between 8 and 50 characters")]
-        public string? NewPassword { get; set; }
-        public string? NewPasswordConfirm { get; set; }
-        public string? FullName { get; set; } = null!;
+        public string Email { get; set; } = null!;
+        [Required(ErrorMessage = "FullName is required")]
+        public string FullName { get; set; } = null!;
         public DateTime? DateOfBirth { get; set; }
         [RegularExpression("([0-9]+)", ErrorMessage = "The phone number is invalid")]
         public string? Phone { get; set; }
