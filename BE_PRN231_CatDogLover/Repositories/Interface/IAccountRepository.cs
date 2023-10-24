@@ -22,5 +22,8 @@ namespace Repositories.Interface
         Task ResetPasswordAsync(int id, string currentPassword, string newPassword);
         Task ForgetPasswordAsync(int id);
 
+        Task<Account> UpdateVersion(int id);
+        Task<Account> GetByRefreshToken(string token);
+
     }
 }

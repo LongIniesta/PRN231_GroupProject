@@ -165,5 +165,9 @@ namespace Repositories
                 throw new Exception(ex.Message);
             }
         }
+
+        public Task<Account> UpdateVersion(int id) => AccountDAO.Instance.UpdateVersion(id);
+
+        public Task<Account> GetByRefreshToken(string token) => AccountDAO.Instance.GetByRefreshToken(token);
     }
 }

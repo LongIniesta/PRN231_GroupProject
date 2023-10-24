@@ -33,13 +33,28 @@ namespace DataAccess
             {
                 Account? result = null;
                 var DBContext = new CatDogLoverContext();
-                result = await DBContext.Accounts.FirstOrDefaultAsync(u => u.AccountId == id);
+                result = await DBContext.Accounts.Include(a => a.Role).FirstOrDefaultAsync(u => u.AccountId == id);
                 return result != null ? result : throw new Exception("Not found account!");
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
+        }
+
+        public async Task<Account> GetByRefreshToken(string token)
+        {
+            Account? result = null;
+            try
+            {   
+                var DBContext = new CatDogLoverContext();
+                result = await DBContext.Accounts.Include(a => a.Role).FirstOrDefaultAsync(u => u.RefreshToken == token);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            return result;
         }
 
         public Account AddAccount(Account Account)
@@ -81,6 +96,24 @@ namespace DataAccess
             {
                 var DBContext = new CatDogLoverContext();
                 result = DBContext.Accounts.Update(Account).Entity;
+                await DBContext.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            return result;
+        }
+
+        public async Task<Account> UpdateVersion(int id)
+        {
+            Account result;
+            result = await GetByID(id);
+            result.Version = result.Version + 1;
+            try
+            {
+                var DBContext = new CatDogLoverContext();
+                result = DBContext.Accounts.Update(result).Entity;
                 await DBContext.SaveChangesAsync();
             }
             catch (Exception ex)

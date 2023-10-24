@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.Extensions.Configuration;
 
 namespace BusinessObjects
 {
@@ -37,7 +36,7 @@ namespace BusinessObjects
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer(new ConfigurationBuilder().AddJsonFile("appsettings.json").Build().GetConnectionString("MyConnectionString"));
+                optionsBuilder.UseSqlServer("Server=prn231catdoglover.database.windows.net;Uid=PRN231;Pwd=Catdoglover!;Database=CatDogLover");
             }
         }
 
@@ -73,6 +72,10 @@ namespace BusinessObjects
 
                 entity.Property(e => e.Phone)
                     .HasMaxLength(20)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.RefreshToken)
+                    .HasMaxLength(500)
                     .IsUnicode(false);
 
                 entity.HasOne(d => d.Role)
@@ -143,6 +146,10 @@ namespace BusinessObjects
             modelBuilder.Entity<GiftComment>(entity =>
             {
                 entity.ToTable("GiftComment");
+
+                entity.Property(e => e.ApproveStatus)
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.Content).HasMaxLength(500);
 

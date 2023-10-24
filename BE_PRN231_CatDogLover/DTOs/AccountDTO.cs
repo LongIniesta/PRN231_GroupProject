@@ -21,6 +21,7 @@ namespace DTOs
         public string? AvatarLink { get; set; }
         public string? Description { get; set; }
         public bool Status { get; set; }
+        public string? RefreshToken { get; set; }
 
         public virtual RoleDTO Role { get; set; } = null!;
     }

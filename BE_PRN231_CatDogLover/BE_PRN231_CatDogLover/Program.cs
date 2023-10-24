@@ -2,12 +2,16 @@ using AutoMapping;
 using BusinessObjects;
 using DTOs;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.OData;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OData.Edm;
 using Microsoft.OData.ModelBuilder;
 using Microsoft.OpenApi.Models;
+using Repositories;
+using Repositories.Interface;
+using System.Security.Claims;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -82,6 +86,42 @@ builder.Services.AddAuthorization(options =>
     {
         policy.RequireRole("admin", "staff");
     });
+    options.DefaultPolicy = new AuthorizationPolicyBuilder()
+    .RequireAssertion(context =>
+    {
+        var role = context.User.FindFirst(ClaimTypes.Role).Value;
+        if (role == null) return false;
+
+        if (role.ToString() == "admin")
+        {
+            var versionClaimValue = context.User.FindFirst("version")?.Value;
+
+            if (!string.IsNullOrEmpty(versionClaimValue) && int.Parse(versionClaimValue) == int.Parse(builder.Configuration["AdminAccount:Version"]))
+            {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+        else {
+            var idClaimValue = context.User.FindFirst("id")?.Value;
+
+            if (!string.IsNullOrEmpty(idClaimValue))
+            {
+                IAccountRepository accountRepository = new AccountRepository();
+                int versionCheck = (int)accountRepository.GetAccountById(int.Parse(idClaimValue)).Result.Version;
+                var versionClaimValue = context.User.FindFirst("version")?.Value;
+
+                if (!string.IsNullOrEmpty(versionClaimValue) && int.Parse(versionClaimValue) == versionCheck)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+        
+    }).Build();
 });
 
 

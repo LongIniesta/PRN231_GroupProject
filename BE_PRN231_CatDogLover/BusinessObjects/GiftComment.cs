@@ -11,6 +11,7 @@ namespace BusinessObjects
         public string Content { get; set; } = null!;
         public DateTime CreateDate { get; set; }
         public bool Status { get; set; }
+        public string ApproveStatus { get; set; } = null!;
 
         public virtual Account Account { get; set; } = null!;
         public virtual Gift Gift { get; set; } = null!;

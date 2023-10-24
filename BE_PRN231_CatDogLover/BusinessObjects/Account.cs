@@ -28,6 +28,8 @@ namespace BusinessObjects
         public string? AvatarLink { get; set; }
         public string? Description { get; set; }
         public bool Status { get; set; }
+        public string? RefreshToken { get; set; }
+        public int? Version { get; set; }
 
         public virtual Role Role { get; set; } = null!;
         public virtual ICollection<GiftComment> GiftComments { get; set; }

@@ -6,10 +6,12 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json.Linq;
 using Repositories;
 using Repositories.Interface;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Security.Principal;
 using System.Text;
 
 namespace BE_PRN231_CatDogLover.Controllers
@@ -18,7 +20,7 @@ namespace BE_PRN231_CatDogLover.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
-        private readonly IConfiguration Configuration;
+        private IConfiguration Configuration;
         private readonly IMapper mapper;
         private IAccountRepository accountRepository;
         public AuthController(IConfiguration configuration, IMapper mapper)
@@ -30,13 +32,17 @@ namespace BE_PRN231_CatDogLover.Controllers
 
         [AllowAnonymous]
         [HttpPost("LoginUser")]
-        public IActionResult LoginUser([FromBody] LoginRequest login)
+        public async Task<IActionResult> LoginUser([FromBody] LoginRequest login)
         {
             IActionResult response = Unauthorized();
             Account account = accountRepository.GetAll().SingleOrDefault(a => a.Email == login.Email && a.Password == login.Password && a.Role.RoleName == "user");
             if (account != null)
             {
-                LoginRespone loginRespone = GenerateToken(account.Role.RoleName);
+                account.Version = account.Version + 1;
+                LoginRespone loginRespone = GenerateToken(account.Role.RoleName,(int) account.Version, account.AccountId);
+                
+                account.RefreshToken = loginRespone.RefreshToken;
+                account = await accountRepository.UpdateAccount(account);
                 loginRespone.Account = mapper.Map<AccountDTO>(account);
                 loginRespone.Account.Password = null;
                 response = Ok(loginRespone);
@@ -45,13 +51,17 @@ namespace BE_PRN231_CatDogLover.Controllers
         }
         [AllowAnonymous]
         [HttpPost("LoginStaff")]
-        public IActionResult LoginStaff([FromBody] LoginRequest login)
+        public async Task<IActionResult> LoginStaff([FromBody] LoginRequest login)
         {
             IActionResult response = Unauthorized();
             Account account = accountRepository.GetAll().SingleOrDefault(a => a.Email == login.Email && a.Password == login.Password && a.Role.RoleName == "staff");
             if (account != null)
             {
-                LoginRespone loginRespone = GenerateToken(account.Role.RoleName);
+                account.Version = account.Version + 1;
+                LoginRespone loginRespone = GenerateToken(account.Role.RoleName, (int) account.Version, account.AccountId);
+                
+                account.RefreshToken = loginRespone.RefreshToken;
+                account = await accountRepository.UpdateAccount(account);
                 loginRespone.Account = mapper.Map<AccountDTO>(account);
                 loginRespone.Account.Password = null;
                 response = Ok(loginRespone);
@@ -63,8 +73,11 @@ namespace BE_PRN231_CatDogLover.Controllers
         public IActionResult LoginAdmin([FromBody] LoginRequest login)
         {
             IActionResult response = Unauthorized();
-            if (login.Email == Configuration["AdminAccount:Email"] && login.Password == Configuration["AdminAccount:Password"]) { 
-                LoginRespone loginRespone = GenerateToken("admin");
+            if (login.Email == Configuration["AdminAccount:Email"] && login.Password == Configuration["AdminAccount:Password"]) {
+                int newVersion = (int.Parse(Configuration["AdminAccount:Version"]) + 1);
+                Configuration["AdminAccount:Version"] = newVersion.ToString();
+                LoginRespone loginRespone = GenerateToken("admin", int.Parse(Configuration["AdminAccount:Version"]), 1);
+                Configuration["AdminAccount:RefreshToken"] = loginRespone.RefreshToken;
                 response = Ok(loginRespone);
             }
             return response;
@@ -89,6 +102,7 @@ namespace BE_PRN231_CatDogLover.Controllers
                 account.CreateDate = DateTime.Now;
                 account.RoleId = 1;
                 account.Status = true;
+                account.Version = 1;
                 accountRepository.AddAccount(account);
             }
             catch (Exception ex)
@@ -98,46 +112,47 @@ namespace BE_PRN231_CatDogLover.Controllers
             return Created("", mapper.Map<AccountDTO>(account));
         }
 
-        [HttpGet("RefreshToken/{refreshToken}")]
-        public IActionResult RefreshToken(string refreshToken)
+        [Authorize]
+        [HttpGet("TestAuth")]
+        public IActionResult Test()
         {
-            var jwtKey = Encoding.ASCII.GetBytes(Configuration["jwtKey"]);
-            var refreshKey = Encoding.ASCII.GetBytes(Configuration["jwtKeyRefresh"]);
+            return Ok("hihi");
+        }
 
-            var tokenHandler = new JwtSecurityTokenHandler();
-
-            // Kiểm tra tính hợp lệ của Refresh Token
-            var validationParameters = new TokenValidationParameters
-            {
-                ValidateIssuer = false,
-                ValidateAudience = false,
-                ValidateIssuerSigningKey = true,
-                IssuerSigningKey = new SymmetricSecurityKey(refreshKey)
-            };
-
+        [HttpGet("RefreshToken/{refreshToken}")]
+        public async Task<ActionResult<LoginRespone>> RefreshToken(string refreshToken)
+        {
+            if (Configuration["AdminAccount:RefreshToken"] == refreshToken) {
+                try
+                {
+                    int newVersion = (int.Parse(Configuration["AdminAccount:Version"]) + 1);
+                    Configuration["AdminAccount:Version"] = newVersion.ToString();
+                    LoginRespone loginRespone = GenerateToken("admin", newVersion, 1);
+                    Configuration["AdminAccount:RefreshToken"] = loginRespone.RefreshToken;
+                    return Ok(loginRespone);
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest("Invalid Refresh Token");
+                }
+            }
+            Account account = await accountRepository.GetByRefreshToken(refreshToken);
+            if (account == null) return BadRequest("Refresh token invalid!");
             try
             {
-                SecurityToken validatedToken;
-                var principal = tokenHandler.ValidateToken(refreshToken, validationParameters, out validatedToken);
-
-                tokenHandler = new JwtSecurityTokenHandler();
-                var tokenDescriptor = new SecurityTokenDescriptor
-                {
-                    Subject = new ClaimsIdentity(principal.Claims),
-                    Expires = DateTime.UtcNow.AddMinutes(15), // Thời hạn của Access Token
-                    SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(jwtKey), SecurityAlgorithms.HmacSha256Signature)
-                };
-                var token = tokenHandler.CreateToken(tokenDescriptor);
-                var accessToken = tokenHandler.WriteToken(token);
-                return Ok(accessToken);
+                account = await accountRepository.UpdateVersion(account.AccountId);
+                account = await accountRepository.GetAccountById(account.AccountId);
+                LoginRespone loginRespone = GenerateToken(account.Role.RoleName,(int) account.Version, account.AccountId);
+                account.RefreshToken = loginRespone.RefreshToken;
+                await accountRepository.UpdateAccount(account);
+                return Ok(loginRespone); 
             }
             catch (Exception ex)
             {
-                // Xử lý lỗi nếu Refresh Token không hợp lệ
                 return BadRequest("Invalid Refresh Token");
             }
         }
-        private LoginRespone GenerateToken(string Role)
+        private LoginRespone GenerateToken(string Role, int version, int id)
         {
             var jwtKey = Encoding.ASCII.GetBytes(Configuration["jwtKey"]);
             var refreshKey = Encoding.ASCII.GetBytes(Configuration["jwtKeyRefresh"]);
@@ -147,7 +162,9 @@ namespace BE_PRN231_CatDogLover.Controllers
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-            new Claim(ClaimTypes.Role, Role),
+                    new Claim(ClaimTypes.Role, Role),
+                    new Claim("version", version.ToString()),
+                    new Claim("id", id.ToString()),
                 }),
                 Expires = DateTime.UtcNow.AddMinutes(15), // Thời hạn của Access Token
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(jwtKey), SecurityAlgorithms.HmacSha256Signature)
@@ -159,7 +176,9 @@ namespace BE_PRN231_CatDogLover.Controllers
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-            new Claim(ClaimTypes.Role, Role),
+                    new Claim(ClaimTypes.Role, Role),
+                    new Claim("version", version.ToString()),
+                    new Claim("id", id.ToString()),
                 }),
                 Expires = DateTime.UtcNow.AddHours(1), // Thời hạn của Refresh Token
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(refreshKey), SecurityAlgorithms.HmacSha256Signature)
