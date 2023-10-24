@@ -70,17 +70,41 @@ namespace BE_PRN231_CatDogLover.Controllers
         }
         [AllowAnonymous]
         [HttpPost("LoginAdmin")]
-        public IActionResult LoginAdmin([FromBody] LoginRequest login)
+        public async Task<IActionResult> LoginAdmin([FromBody] LoginRequest login)
         {
             IActionResult response = Unauthorized();
-            if (login.Email == Configuration["AdminAccount:Email"] && login.Password == Configuration["AdminAccount:Password"]) {
-                int newVersion = (int.Parse(Configuration["AdminAccount:Version"]) + 1);
-                Configuration["AdminAccount:Version"] = newVersion.ToString();
-                LoginRespone loginRespone = GenerateToken("admin", int.Parse(Configuration["AdminAccount:Version"]), 1);
-                Configuration["AdminAccount:RefreshToken"] = loginRespone.RefreshToken;
+            Account account = accountRepository.GetAll().SingleOrDefault(a => a.Email == login.Email && a.Password == login.Password && a.Role.RoleName == "admin");
+            if (account != null)
+            {
+                account.Version = account.Version + 1;
+                LoginRespone loginRespone = GenerateToken(account.Role.RoleName, (int)account.Version, account.AccountId);
+
+                account.RefreshToken = loginRespone.RefreshToken;
+                account = await accountRepository.UpdateAccount(account);
+                loginRespone.Account = mapper.Map<AccountDTO>(account);
+                loginRespone.Account.Password = null;
                 response = Ok(loginRespone);
             }
             return response;
+        }
+
+        [AllowAnonymous]
+        [HttpPost("Logout/{refreshToken}")]
+        public async Task<IActionResult> Logout(string refreshToken)
+        {
+            Account account = await accountRepository.GetByRefreshToken(refreshToken);
+            if (account == null) return BadRequest("Refresh token invalid!");
+            try
+            {
+                account = await accountRepository.UpdateVersion(account.AccountId);
+                account.RefreshToken = null;
+                await accountRepository.UpdateAccount(account);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Invalid Refresh Token");
+            }
         }
 
         [HttpPost("Register")]
@@ -91,7 +115,7 @@ namespace BE_PRN231_CatDogLover.Controllers
             {
                 return BadRequest("Password not match with confirm");
             }
-            if (register.Email == Configuration["AdminAccount:Email"] || accountRepository.GetAll().Any(a => a.Email.ToLower().Trim() == register.Email.ToLower().Trim()))
+            if (accountRepository.GetAll().Any(a => a.Email.ToLower().Trim() == register.Email.ToLower().Trim()))
             {
                 return BadRequest("Email are already exist");
             }
@@ -122,20 +146,6 @@ namespace BE_PRN231_CatDogLover.Controllers
         [HttpGet("RefreshToken/{refreshToken}")]
         public async Task<ActionResult<LoginRespone>> RefreshToken(string refreshToken)
         {
-            if (Configuration["AdminAccount:RefreshToken"] == refreshToken) {
-                try
-                {
-                    int newVersion = (int.Parse(Configuration["AdminAccount:Version"]) + 1);
-                    Configuration["AdminAccount:Version"] = newVersion.ToString();
-                    LoginRespone loginRespone = GenerateToken("admin", newVersion, 1);
-                    Configuration["AdminAccount:RefreshToken"] = loginRespone.RefreshToken;
-                    return Ok(loginRespone);
-                }
-                catch (Exception ex)
-                {
-                    return BadRequest("Invalid Refresh Token");
-                }
-            }
             Account account = await accountRepository.GetByRefreshToken(refreshToken);
             if (account == null) return BadRequest("Refresh token invalid!");
             try
@@ -152,6 +162,10 @@ namespace BE_PRN231_CatDogLover.Controllers
                 return BadRequest("Invalid Refresh Token");
             }
         }
+
+
+
+
         private LoginRespone GenerateToken(string Role, int version, int id)
         {
             var jwtKey = Encoding.ASCII.GetBytes(Configuration["jwtKey"]);

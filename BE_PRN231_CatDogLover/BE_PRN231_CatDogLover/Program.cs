@@ -89,22 +89,8 @@ builder.Services.AddAuthorization(options =>
     options.DefaultPolicy = new AuthorizationPolicyBuilder()
     .RequireAssertion(context =>
     {
-        var role = context.User.FindFirst(ClaimTypes.Role).Value;
+        var role = context.User.FindFirst(ClaimTypes.Role);
         if (role == null) return false;
-
-        if (role.ToString() == "admin")
-        {
-            var versionClaimValue = context.User.FindFirst("version")?.Value;
-
-            if (!string.IsNullOrEmpty(versionClaimValue) && int.Parse(versionClaimValue) == int.Parse(builder.Configuration["AdminAccount:Version"]))
-            {
-                return true;
-            }
-            else {
-                return false;
-            }
-        }
-        else {
             var idClaimValue = context.User.FindFirst("id")?.Value;
 
             if (!string.IsNullOrEmpty(idClaimValue))
@@ -118,9 +104,7 @@ builder.Services.AddAuthorization(options =>
                     return true;
                 }
             }
-            return false;
-        }
-        
+            return false;        
     }).Build();
 });
 
