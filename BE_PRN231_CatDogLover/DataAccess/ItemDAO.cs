@@ -62,8 +62,8 @@ namespace DataAccess
             {
                 var DBContext = new CatDogLoverContext();
                 Item.ItemId = getNewId();
-                Item.Products = null;
-                Item.ServiceSchedulers = null;
+                Item.Product = null;
+                Item.ServiceScheduler = null;
                 result = DBContext.Items.Add(Item).Entity;
                 DBContext.SaveChanges();
             }

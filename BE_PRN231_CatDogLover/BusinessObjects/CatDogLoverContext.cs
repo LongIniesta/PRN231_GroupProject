@@ -204,6 +204,9 @@ namespace BusinessObjects
             {
                 entity.ToTable("OrderDetail");
 
+                entity.HasIndex(e => e.ItemId, "unique_itemIdOddt")
+                    .IsUnique();
+
                 entity.Property(e => e.ItemId)
                     .HasMaxLength(50)
                     .IsUnicode(false);
@@ -217,8 +220,8 @@ namespace BusinessObjects
                     .IsUnicode(false);
 
                 entity.HasOne(d => d.Item)
-                    .WithMany(p => p.OrderDetails)
-                    .HasForeignKey(d => d.ItemId)
+                    .WithOne(p => p.OrderDetail)
+                    .HasForeignKey<OrderDetail>(d => d.ItemId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__OrderDeta__ItemI__05D8E0BE");
 
@@ -259,6 +262,9 @@ namespace BusinessObjects
                 entity.HasIndex(e => e.ProductId, "UQ__Product__B40CC6CC75D7B5F8")
                     .IsUnique();
 
+                entity.HasIndex(e => e.ItemId, "unique_itemIdPro")
+                    .IsUnique();
+
                 entity.Property(e => e.ItemId)
                     .HasMaxLength(50)
                     .IsUnicode(false);
@@ -284,8 +290,8 @@ namespace BusinessObjects
                     .HasConstraintName("FK__Product__Categor__778AC167");
 
                 entity.HasOne(d => d.Item)
-                    .WithMany(p => p.Products)
-                    .HasForeignKey(d => d.ItemId)
+                    .WithOne(p => p.Product)
+                    .HasForeignKey<Product>(d => d.ItemId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__Product__Status__787EE5A0");
 
@@ -373,6 +379,9 @@ namespace BusinessObjects
 
                 entity.ToTable("ServiceScheduler");
 
+                entity.HasIndex(e => e.ItemId, "unique_itemId")
+                    .IsUnique();
+
                 entity.Property(e => e.ServiceId)
                     .HasMaxLength(50)
                     .IsUnicode(false);
@@ -388,8 +397,8 @@ namespace BusinessObjects
                 entity.Property(e => e.Price).HasColumnType("money");
 
                 entity.HasOne(d => d.Item)
-                    .WithMany(p => p.ServiceSchedulers)
-                    .HasForeignKey(d => d.ItemId)
+                    .WithOne(p => p.ServiceScheduler)
+                    .HasForeignKey<ServiceScheduler>(d => d.ItemId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__ServiceSc__Statu__7F2BE32F");
 
