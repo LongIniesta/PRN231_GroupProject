@@ -15,7 +15,7 @@ namespace BE_PRN231_CatDogLover.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AccountController : ODataController
+    public class AccountController : Controller
     {
         private readonly IConfiguration Configuration;
         private readonly IMapper _mapper;
@@ -27,39 +27,38 @@ namespace BE_PRN231_CatDogLover.Controllers
             _accountRepository = new AccountRepository();
         }
 
-        //[AllowAnonymous]
-        //[HttpGet]
-        //[EnableQuery]
-        //public IActionResult Get([FromQuery] AccountSearchRequest searchRequest)
-        //{
-        //    try
-        //    {
-        //        var response = _mapper.ProjectTo<AccountDTO>(_accountRepository.Search(searchRequest));
-        //        return Ok(response);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return BadRequest(ex.Message);
-        //    }
-        //}
-
         [AllowAnonymous]
         [HttpGet]
-        [EnableQuery]
-        public ActionResult<List<AccountDTO>> GetAccounts()
+        public IActionResult Get([FromQuery] AccountSearchRequest searchRequest)
         {
             try
             {
-                List<Account> result = _accountRepository.GetAll().ToList();
-                return _mapper.Map<List<AccountDTO>>(result);
+                var response = _mapper.ProjectTo<AccountDTO>(_accountRepository.Search(searchRequest));
+                return Ok(response);
             }
             catch (Exception ex)
             {
-                return new BadRequestObjectResult(ex.Message);
+                return BadRequest(ex.Message);
             }
         }
 
-        [Authorize(Policy = "AdminOrStaff")]
+        /*  [AllowAnonymous]
+          [HttpGet]
+          [EnableQuery]
+          public ActionResult<List<AccountDTO>> GetAccounts()
+          {
+              try
+              {
+                  List<Account> result = _accountRepository.GetAll().ToList();
+                  return _mapper.Map<List<AccountDTO>>(result);
+              }
+              catch (Exception ex)
+              {
+                  return new BadRequestObjectResult(ex.Message);
+              }
+          }*/
+
+        [AllowAnonymous]
         [HttpDelete("Ban")]
         public async Task<ActionResult<string>> Ban([FromQuery] int id, string reason)
         {
