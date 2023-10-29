@@ -20,6 +20,7 @@ namespace BusinessObjects
         public string Type { get; set; } = null!;
         public DateTime CreateDate { get; set; }
         public bool Status { get; set; }
+        public int? NumberOfReact { get; set; }
 
         public virtual Account Owner { get; set; } = null!;
         public virtual ICollection<Gift> Gifts { get; set; }

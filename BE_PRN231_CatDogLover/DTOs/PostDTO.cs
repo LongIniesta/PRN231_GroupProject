@@ -16,6 +16,8 @@ namespace DTOs
         public string Type { get; set; } = null!;
         public DateTime CreateDate { get; set; }
         public bool Status { get; set; }
+        public int? NumberOfReact { get; set; }
+        public bool? Reacted { get; set; }
 
         public virtual AccountDTO? Owner { get; set; } = null!;
         public virtual ICollection<GiftDTO>? Gifts { get; set; }
