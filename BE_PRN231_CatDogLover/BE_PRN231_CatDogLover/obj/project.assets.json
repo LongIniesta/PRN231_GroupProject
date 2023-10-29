@@ -71,6 +71,58 @@
           "lib/netstandard1.1/Firebase.Storage.dll": {}
         }
       },
+      "Microsoft.AspNet.OData/7.7.1": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNet.WebApi.Client": "[5.2.2, 5.3.0)",
+          "Microsoft.AspNet.WebApi.Core": "[5.2.2, 5.3.0)",
+          "Microsoft.Extensions.DependencyInjection": "1.0.0",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0",
+          "Microsoft.OData.Core": "[7.17.0, 8.0.0)"
+        },
+        "compile": {
+          "lib/net45/Microsoft.AspNet.OData.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net45/Microsoft.AspNet.OData.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Microsoft.AspNet.WebApi.Client/5.2.2": {
+        "type": "package",
+        "dependencies": {
+          "Newtonsoft.Json": "6.0.4"
+        },
+        "compile": {
+          "lib/net45/System.Net.Http.Formatting.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net45/System.Net.Http.Formatting.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Microsoft.AspNet.WebApi.Core/5.2.2": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNet.WebApi.Client": "5.2.2"
+        },
+        "compile": {
+          "lib/net45/System.Web.Http.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net45/System.Web.Http.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "Microsoft.AspNetCore.Authentication.JwtBearer/6.0.23": {
         "type": "package",
         "dependencies": {
@@ -712,12 +764,12 @@
       "Microsoft.NETCore.Windows.ApiSets/1.0.1": {
         "type": "package"
       },
-      "Microsoft.OData.Core/7.16.0": {
+      "Microsoft.OData.Core/7.17.0": {
         "type": "package",
         "dependencies": {
           "Microsoft.Bcl.AsyncInterfaces": "5.0.0",
-          "Microsoft.OData.Edm": "[7.16.0]",
-          "Microsoft.Spatial": "[7.16.0]"
+          "Microsoft.OData.Edm": "[7.17.0]",
+          "Microsoft.Spatial": "[7.17.0]"
         },
         "compile": {
           "lib/netcoreapp3.1/Microsoft.OData.Core.dll": {
@@ -730,7 +782,7 @@
           }
         }
       },
-      "Microsoft.OData.Edm/7.16.0": {
+      "Microsoft.OData.Edm/7.17.0": {
         "type": "package",
         "dependencies": {
           "System.Runtime.CompilerServices.Unsafe": "4.6.0",
@@ -779,7 +831,7 @@
           }
         }
       },
-      "Microsoft.Spatial/7.16.0": {
+      "Microsoft.Spatial/7.17.0": {
         "type": "package",
         "compile": {
           "lib/netstandard2.0/Microsoft.Spatial.dll": {
@@ -2684,6 +2736,49 @@
         "lib/netstandard1.1/Firebase.Storage.dll"
       ]
     },
+    "Microsoft.AspNet.OData/7.7.1": {
+      "sha512": "rebIcdPbxkHojuW6VWV6zpZuuEan9wxIwoLpTcA6HWijvpyR+aEEu7mbou8EYZATyl4+chKz9mJuA/vJB2bdyQ==",
+      "type": "package",
+      "path": "microsoft.aspnet.odata/7.7.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "images/odata.png",
+        "lib/net45/Microsoft.AspNet.OData.dll",
+        "lib/net45/Microsoft.AspNet.OData.xml",
+        "microsoft.aspnet.odata.7.7.1.nupkg.sha512",
+        "microsoft.aspnet.odata.nuspec"
+      ]
+    },
+    "Microsoft.AspNet.WebApi.Client/5.2.2": {
+      "sha512": "YVq+s0WeXrPxJk57CoElbtMYf95j76uJcW6nue3Cs4eIer9sgUp4rasSo0gALX3ls1Zf2jMceOLik9X/sJyrwA==",
+      "type": "package",
+      "path": "microsoft.aspnet.webapi.client/5.2.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net45/System.Net.Http.Formatting.dll",
+        "lib/net45/System.Net.Http.Formatting.xml",
+        "lib/portable-wp8+netcore45+net45+wp81+wpa81/System.Net.Http.Formatting.dll",
+        "lib/portable-wp8+netcore45+net45+wp81+wpa81/System.Net.Http.Formatting.xml",
+        "microsoft.aspnet.webapi.client.5.2.2.nupkg.sha512",
+        "microsoft.aspnet.webapi.client.nuspec"
+      ]
+    },
+    "Microsoft.AspNet.WebApi.Core/5.2.2": {
+      "sha512": "P5boFqqGDq1XF7PVz1U4ju85wQLT0Pb5BbuiWy72cOmWXJKCCNqL+av6omi30knp62hpmfw+3rSCm+Nmt5zRgQ==",
+      "type": "package",
+      "path": "microsoft.aspnet.webapi.core/5.2.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Content/web.config.transform",
+        "lib/net45/System.Web.Http.dll",
+        "lib/net45/System.Web.Http.xml",
+        "microsoft.aspnet.webapi.core.5.2.2.nupkg.sha512",
+        "microsoft.aspnet.webapi.core.nuspec"
+      ]
+    },
     "Microsoft.AspNetCore.Authentication.JwtBearer/6.0.23": {
       "sha512": "T/TfelJX4wpENzYXIZ5mo/SpqBNTNWmuDpIXMnWF0fcBKCjB+JcOmD3hNW8tdw4/05/fs3rhtvrOuVl0D+6x1Q==",
       "type": "package",
@@ -3849,10 +3944,10 @@
         "runtime.json"
       ]
     },
-    "Microsoft.OData.Core/7.16.0": {
-      "sha512": "6cskc9e8en3dPTHnMiGoDu9vYQ83OWg7klmwxE0ImI623XW8HTNGk7+Khm/Ell8SPGVxWfcju84owyURFUjhkA==",
+    "Microsoft.OData.Core/7.17.0": {
+      "sha512": "6Icm8+YU15hKSNjdDwRCg8oy44mZOhQkQQO5qZJTfIpZWj60xZmZwImZoO2nXa9XFKsM5pUxORIIFVXXXw/xIw==",
       "type": "package",
-      "path": "microsoft.odata.core/7.16.0",
+      "path": "microsoft.odata.core/7.17.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -3864,14 +3959,14 @@
         "lib/netstandard1.1/Microsoft.OData.Core.xml",
         "lib/netstandard2.0/Microsoft.OData.Core.dll",
         "lib/netstandard2.0/Microsoft.OData.Core.xml",
-        "microsoft.odata.core.7.16.0.nupkg.sha512",
+        "microsoft.odata.core.7.17.0.nupkg.sha512",
         "microsoft.odata.core.nuspec"
       ]
     },
-    "Microsoft.OData.Edm/7.16.0": {
-      "sha512": "nFjO3E+8nFaNOoE/Ne3I5MWmrzQ43W5MeSEwGprKtqw3mn+2ZADxMMmJ2uFWdm2oxDo7CNQNzmb8xQmQP5Aitg==",
+    "Microsoft.OData.Edm/7.17.0": {
+      "sha512": "E2S2Z1YK6LvEl1muUv5dCHDaaCHZ7JsM7cvmBFWA4hknm4+Iniz2rW+UjvNOOKUlvEXA337/DyLvFfdNAT7rcg==",
       "type": "package",
-      "path": "microsoft.odata.edm/7.16.0",
+      "path": "microsoft.odata.edm/7.17.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -3881,7 +3976,7 @@
         "lib/netstandard1.1/Microsoft.OData.Edm.xml",
         "lib/netstandard2.0/Microsoft.OData.Edm.dll",
         "lib/netstandard2.0/Microsoft.OData.Edm.xml",
-        "microsoft.odata.edm.7.16.0.nupkg.sha512",
+        "microsoft.odata.edm.7.17.0.nupkg.sha512",
         "microsoft.odata.edm.nuspec"
       ]
     },
@@ -3918,10 +4013,10 @@
         "microsoft.openapi.nuspec"
       ]
     },
-    "Microsoft.Spatial/7.16.0": {
-      "sha512": "6MvTlVTYovRA9gXNfYdWq3TLwOaJuWGRG07A1U7LIteQYaHQZ1MejRU93/Hb0RLGXZq5cMZF8a9ZP3UXAshAtw==",
+    "Microsoft.Spatial/7.17.0": {
+      "sha512": "gl44osmJiIR8HW/rjx9z/Dw5lVf5H+qPhYnB1AkJQlapR8mYwj9Svc9ZssGNEZAhF8WOwkz9Cs2L/ehCzVykhg==",
       "type": "package",
-      "path": "microsoft.spatial/7.16.0",
+      "path": "microsoft.spatial/7.17.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -3931,7 +4026,7 @@
         "lib/netstandard1.1/Microsoft.Spatial.xml",
         "lib/netstandard2.0/Microsoft.Spatial.dll",
         "lib/netstandard2.0/Microsoft.Spatial.xml",
-        "microsoft.spatial.7.16.0.nupkg.sha512",
+        "microsoft.spatial.7.17.0.nupkg.sha512",
         "microsoft.spatial.nuspec"
       ]
     },
@@ -8150,6 +8245,7 @@
       "BCrypt.Net-Core >= 1.6.0",
       "Firebase.Auth >= 1.0.0",
       "FirebaseStorage.net >= 1.0.3",
+      "Microsoft.AspNet.OData >= 7.7.1",
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 6.0.23",
       "Microsoft.AspNetCore.OData >= 8.2.3",
       "Repositories >= 1.0.0",
@@ -8219,6 +8315,10 @@
             "target": "Package",
             "version": "[1.0.3, )"
           },
+          "Microsoft.AspNet.OData": {
+            "target": "Package",
+            "version": "[7.7.1, )"
+          },
           "Microsoft.AspNetCore.Authentication.JwtBearer": {
             "target": "Package",
             "version": "[6.0.23, )"
@@ -8254,5 +8354,37 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.414\\RuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'Microsoft.AspNet.OData 7.7.1' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net6.0'. This package may not be fully compatible with your project.",
+      "libraryId": "Microsoft.AspNet.OData",
+      "targetGraphs": [
+        "net6.0"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'Microsoft.AspNet.WebApi.Client 5.2.2' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net6.0'. This package may not be fully compatible with your project.",
+      "libraryId": "Microsoft.AspNet.WebApi.Client",
+      "targetGraphs": [
+        "net6.0"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'Microsoft.AspNet.WebApi.Core 5.2.2' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net6.0'. This package may not be fully compatible with your project.",
+      "libraryId": "Microsoft.AspNet.WebApi.Core",
+      "targetGraphs": [
+        "net6.0"
+      ]
+    }
+  ]
 }

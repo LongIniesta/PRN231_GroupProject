@@ -1,6 +1,10 @@
 {
   "version": 2,
+<<<<<<< Updated upstream
   "dgSpecHash": "sZHZz4RRCFw35YRdr/2BMmWmmtO7qcPcNbtcIMBODzSdSwCZzRog/5d9HfYZOri2dhGAWMihghyXAUQh7Jk6sg==",
+=======
+  "dgSpecHash": "+SxM1xaKyL0n2bb/fZlsR7u04Rh/kah9ZiOQ9yBLAE7CWqQLDj5Xe9D6I4kkLPZeEFjIlSLkMs0eJUpiu6A79w==",
+>>>>>>> Stashed changes
   "success": true,
   "projectFilePath": "D:\\FA23\\PRN231\\PRN231_GroupProject\\BE_PRN231_CatDogLover\\BE_PRN231_CatDogLover\\BE_PRN231_CatDogLover.csproj",
   "expectedPackageFiles": [
@@ -9,6 +13,12 @@
     "C:\\Users\\baolo\\.nuget\\packages\\bcrypt.net-core\\1.6.0\\bcrypt.net-core.1.6.0.nupkg.sha512",
     "C:\\Users\\baolo\\.nuget\\packages\\firebase.auth\\1.0.0\\firebase.auth.1.0.0.nupkg.sha512",
     "C:\\Users\\baolo\\.nuget\\packages\\firebasestorage.net\\1.0.3\\firebasestorage.net.1.0.3.nupkg.sha512",
+<<<<<<< Updated upstream
+=======
+    "C:\\Users\\baolo\\.nuget\\packages\\microsoft.aspnet.odata\\7.7.1\\microsoft.aspnet.odata.7.7.1.nupkg.sha512",
+    "C:\\Users\\baolo\\.nuget\\packages\\microsoft.aspnet.webapi.client\\5.2.2\\microsoft.aspnet.webapi.client.5.2.2.nupkg.sha512",
+    "C:\\Users\\baolo\\.nuget\\packages\\microsoft.aspnet.webapi.core\\5.2.2\\microsoft.aspnet.webapi.core.5.2.2.nupkg.sha512",
+>>>>>>> Stashed changes
     "C:\\Users\\baolo\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\6.0.23\\microsoft.aspnetcore.authentication.jwtbearer.6.0.23.nupkg.sha512",
     "C:\\Users\\baolo\\.nuget\\packages\\microsoft.aspnetcore.odata\\8.2.3\\microsoft.aspnetcore.odata.8.2.3.nupkg.sha512",
     "C:\\Users\\baolo\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\5.0.0\\microsoft.bcl.asyncinterfaces.5.0.0.nupkg.sha512",
@@ -48,11 +58,19 @@
     "C:\\Users\\baolo\\.nuget\\packages\\microsoft.netcore.runtime.coreclr\\1.0.2\\microsoft.netcore.runtime.coreclr.1.0.2.nupkg.sha512",
     "C:\\Users\\baolo\\.nuget\\packages\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
     "C:\\Users\\baolo\\.nuget\\packages\\microsoft.netcore.windows.apisets\\1.0.1\\microsoft.netcore.windows.apisets.1.0.1.nupkg.sha512",
+<<<<<<< Updated upstream
     "C:\\Users\\baolo\\.nuget\\packages\\microsoft.odata.core\\7.16.0\\microsoft.odata.core.7.16.0.nupkg.sha512",
     "C:\\Users\\baolo\\.nuget\\packages\\microsoft.odata.edm\\7.16.0\\microsoft.odata.edm.7.16.0.nupkg.sha512",
     "C:\\Users\\baolo\\.nuget\\packages\\microsoft.odata.modelbuilder\\1.0.9\\microsoft.odata.modelbuilder.1.0.9.nupkg.sha512",
     "C:\\Users\\baolo\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
     "C:\\Users\\baolo\\.nuget\\packages\\microsoft.spatial\\7.16.0\\microsoft.spatial.7.16.0.nupkg.sha512",
+=======
+    "C:\\Users\\baolo\\.nuget\\packages\\microsoft.odata.core\\7.17.0\\microsoft.odata.core.7.17.0.nupkg.sha512",
+    "C:\\Users\\baolo\\.nuget\\packages\\microsoft.odata.edm\\7.17.0\\microsoft.odata.edm.7.17.0.nupkg.sha512",
+    "C:\\Users\\baolo\\.nuget\\packages\\microsoft.odata.modelbuilder\\1.0.9\\microsoft.odata.modelbuilder.1.0.9.nupkg.sha512",
+    "C:\\Users\\baolo\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\baolo\\.nuget\\packages\\microsoft.spatial\\7.17.0\\microsoft.spatial.7.17.0.nupkg.sha512",
+>>>>>>> Stashed changes
     "C:\\Users\\baolo\\.nuget\\packages\\microsoft.win32.primitives\\4.3.0\\microsoft.win32.primitives.4.3.0.nupkg.sha512",
     "C:\\Users\\baolo\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
     "C:\\Users\\baolo\\.nuget\\packages\\microsoft.win32.systemevents\\4.7.0\\microsoft.win32.systemevents.4.7.0.nupkg.sha512",
@@ -149,5 +167,36 @@
     "C:\\Users\\baolo\\.nuget\\packages\\system.xml.readerwriter\\4.3.0\\system.xml.readerwriter.4.3.0.nupkg.sha512",
     "C:\\Users\\baolo\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'Microsoft.AspNet.OData 7.7.1' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net6.0'. This package may not be fully compatible with your project.",
+      "libraryId": "Microsoft.AspNet.OData",
+      "targetGraphs": [
+        "net6.0"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'Microsoft.AspNet.WebApi.Client 5.2.2' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net6.0'. This package may not be fully compatible with your project.",
+      "libraryId": "Microsoft.AspNet.WebApi.Client",
+      "targetGraphs": [
+        "net6.0"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'Microsoft.AspNet.WebApi.Core 5.2.2' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net6.0'. This package may not be fully compatible with your project.",
+      "libraryId": "Microsoft.AspNet.WebApi.Core",
+      "targetGraphs": [
+        "net6.0"
+      ]
+    }
+  ]
 }
