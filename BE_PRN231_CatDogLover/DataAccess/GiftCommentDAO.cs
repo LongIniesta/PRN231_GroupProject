@@ -31,7 +31,7 @@ namespace DataAccess
             GiftComment result = null;
             try
             {
-                var DBContext = new CatDogLoverContext();
+                var DBContext = new PRN231Context();
                 result = DBContext.GiftComments.SingleOrDefault(u => u.GiftCommentId == id);
             }
             catch (Exception ex)
@@ -47,7 +47,7 @@ namespace DataAccess
             GiftComment result;
             try
             {
-                var DBContext = new CatDogLoverContext();
+                var DBContext = new PRN231Context();
                 result = DBContext.GiftComments.Add(GiftComment).Entity;
                 DBContext.SaveChanges();
             }
@@ -64,7 +64,7 @@ namespace DataAccess
             GiftComment GiftComment = GetByID(id);
             try
             {
-                var DBContext = new CatDogLoverContext();
+                var DBContext = new PRN231Context();
                 result = DBContext.GiftComments.Remove(GiftComment).Entity;
                 DBContext.SaveChanges();
             }
@@ -79,7 +79,7 @@ namespace DataAccess
             GiftComment result;
             try
             {
-                var DBContext = new CatDogLoverContext();
+                var DBContext = new PRN231Context();
                 result = DBContext.GiftComments.Update(GiftComment).Entity;
                 DBContext.SaveChanges();
             }
@@ -95,7 +95,7 @@ namespace DataAccess
             List<GiftComment> result = new List<GiftComment>();
             try
             {
-                var DBContext = new CatDogLoverContext();
+                var DBContext = new PRN231Context();
                 result = DBContext.GiftComments.ToList();
             }
             catch (Exception ex)

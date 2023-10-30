@@ -31,7 +31,7 @@ namespace DataAccess
             ReactType result = null;
             try
             {
-                var DBContext = new CatDogLoverContext();
+                var DBContext = new PRN231Context();
                 result = DBContext.ReactTypes.SingleOrDefault(u => u.ReactTypeId == id);
             }
             catch (Exception ex)
@@ -47,7 +47,7 @@ namespace DataAccess
             ReactType result;
             try
             {
-                var DBContext = new CatDogLoverContext();
+                var DBContext = new PRN231Context();
                 result = DBContext.ReactTypes.Add(ReactType).Entity;
                 DBContext.SaveChanges();
             }
@@ -64,7 +64,7 @@ namespace DataAccess
             ReactType ReactType = GetByID(id);
             try
             {
-                var DBContext = new CatDogLoverContext();
+                var DBContext = new PRN231Context();
                 result = DBContext.ReactTypes.Remove(ReactType).Entity;
                 DBContext.SaveChanges();
             }
@@ -79,7 +79,7 @@ namespace DataAccess
             ReactType result;
             try
             {
-                var DBContext = new CatDogLoverContext();
+                var DBContext = new PRN231Context();
                 result = DBContext.ReactTypes.Update(ReactType).Entity;
                 DBContext.SaveChanges();
             }
@@ -95,7 +95,7 @@ namespace DataAccess
             List<ReactType> result = new List<ReactType>();
             try
             {
-                var DBContext = new CatDogLoverContext();
+                var DBContext = new PRN231Context();
                 result = DBContext.ReactTypes.ToList();
             }
             catch (Exception ex)

@@ -32,7 +32,7 @@ namespace DataAccess
             Item result = null;
             try
             {
-                var DBContext = new CatDogLoverContext();
+                var DBContext = new PRN231Context();
                 result = DBContext.Items.SingleOrDefault(u => u.ItemId == id);
             }
             catch (Exception ex)
@@ -44,7 +44,7 @@ namespace DataAccess
 
         private string getNewId() {
             string result = "IT";
-            var DBContext = new CatDogLoverContext();
+            var DBContext = new PRN231Context();
             if (DBContext.Items.Count() <= 0) result += "1";
             else
             {
@@ -60,7 +60,7 @@ namespace DataAccess
             Item result;
             try
             {
-                var DBContext = new CatDogLoverContext();
+                var DBContext = new PRN231Context();
                 Item.ItemId = getNewId();
                 Item.Product = null;
                 Item.ServiceScheduler = null;
@@ -80,7 +80,7 @@ namespace DataAccess
             Item Item = GetByID(id);
             try
             {
-                var DBContext = new CatDogLoverContext();
+                var DBContext = new PRN231Context();
                 result = DBContext.Items.Remove(Item).Entity;
                 DBContext.SaveChanges();
             }
@@ -95,7 +95,7 @@ namespace DataAccess
             Item result;
             try
             {
-                var DBContext = new CatDogLoverContext();
+                var DBContext = new PRN231Context();
                 result = DBContext.Items.Update(Item).Entity;
                 DBContext.SaveChanges();
             }
@@ -111,7 +111,7 @@ namespace DataAccess
             List<Item> result = new List<Item>();
             try
             {
-                var DBContext = new CatDogLoverContext();
+                var DBContext = new PRN231Context();
                 result = DBContext.Items.ToList();
             }
             catch (Exception ex)

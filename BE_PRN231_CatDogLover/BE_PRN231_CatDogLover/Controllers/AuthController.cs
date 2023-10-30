@@ -180,7 +180,7 @@ namespace BE_PRN231_CatDogLover.Controllers
                     new Claim("version", version.ToString()),
                     new Claim("id", id.ToString()),
                 }),
-                Expires = DateTime.UtcNow.AddMinutes(15), // Thời hạn của Access Token
+                Expires = DateTime.UtcNow.AddMinutes(60), // Thời hạn của Access Token
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(jwtKey), SecurityAlgorithms.HmacSha256Signature)
             };
             var token = tokenHandler.CreateToken(tokenDescriptor);
@@ -194,7 +194,7 @@ namespace BE_PRN231_CatDogLover.Controllers
                     new Claim("version", version.ToString()),
                     new Claim("id", id.ToString()),
                 }),
-                Expires = DateTime.UtcNow.AddHours(1), // Thời hạn của Refresh Token
+                Expires = DateTime.UtcNow.AddHours(1), 
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(refreshKey), SecurityAlgorithms.HmacSha256Signature)
             };
             var refresh = tokenHandler.CreateToken(refreshDescriptor);

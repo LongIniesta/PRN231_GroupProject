@@ -10,6 +10,9 @@ D:\FA23\PRN231\PRN231_GroupProject\BE_PRN231_CatDogLover\BE_PRN231_CatDogLover\o
 D:\FA23\PRN231\PRN231_GroupProject\BE_PRN231_CatDogLover\BE_PRN231_CatDogLover\obj\Release\net6.0\PubTmp\Out\BCrypt.Net-Core.dll
 D:\FA23\PRN231\PRN231_GroupProject\BE_PRN231_CatDogLover\BE_PRN231_CatDogLover\obj\Release\net6.0\PubTmp\Out\Firebase.Auth.dll
 D:\FA23\PRN231\PRN231_GroupProject\BE_PRN231_CatDogLover\BE_PRN231_CatDogLover\obj\Release\net6.0\PubTmp\Out\Firebase.Storage.dll
+D:\FA23\PRN231\PRN231_GroupProject\BE_PRN231_CatDogLover\BE_PRN231_CatDogLover\obj\Release\net6.0\PubTmp\Out\Microsoft.AspNet.OData.dll
+D:\FA23\PRN231\PRN231_GroupProject\BE_PRN231_CatDogLover\BE_PRN231_CatDogLover\obj\Release\net6.0\PubTmp\Out\System.Net.Http.Formatting.dll
+D:\FA23\PRN231\PRN231_GroupProject\BE_PRN231_CatDogLover\BE_PRN231_CatDogLover\obj\Release\net6.0\PubTmp\Out\System.Web.Http.dll
 D:\FA23\PRN231\PRN231_GroupProject\BE_PRN231_CatDogLover\BE_PRN231_CatDogLover\obj\Release\net6.0\PubTmp\Out\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 D:\FA23\PRN231\PRN231_GroupProject\BE_PRN231_CatDogLover\BE_PRN231_CatDogLover\obj\Release\net6.0\PubTmp\Out\Microsoft.AspNetCore.OData.dll
 D:\FA23\PRN231\PRN231_GroupProject\BE_PRN231_CatDogLover\BE_PRN231_CatDogLover\obj\Release\net6.0\PubTmp\Out\Microsoft.Bcl.AsyncInterfaces.dll

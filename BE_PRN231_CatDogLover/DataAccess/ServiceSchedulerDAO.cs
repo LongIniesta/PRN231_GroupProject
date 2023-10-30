@@ -31,7 +31,7 @@ namespace DataAccess
             ServiceScheduler result = null;
             try
             {
-                var DBContext = new CatDogLoverContext();
+                var DBContext = new PRN231Context();
                 result = DBContext.ServiceSchedulers.SingleOrDefault(u => u.ServiceId == id && u.StartDate == startDate);
             }
             catch (Exception ex)
@@ -47,7 +47,7 @@ namespace DataAccess
             ServiceScheduler result;
             try
             {
-                var DBContext = new CatDogLoverContext();
+                var DBContext = new PRN231Context();
                 result = DBContext.ServiceSchedulers.Add(ServiceScheduler).Entity;
                 DBContext.SaveChanges();
             }
@@ -64,7 +64,7 @@ namespace DataAccess
             ServiceScheduler ServiceScheduler = GetByID(id, startDate);
             try
             {
-                var DBContext = new CatDogLoverContext();
+                var DBContext = new PRN231Context();
                 result = DBContext.ServiceSchedulers.Remove(ServiceScheduler).Entity;
                 DBContext.SaveChanges();
             }
@@ -79,7 +79,7 @@ namespace DataAccess
             ServiceScheduler result;
             try
             {
-                var DBContext = new CatDogLoverContext();
+                var DBContext = new PRN231Context();
                 result = DBContext.ServiceSchedulers.Update(ServiceScheduler).Entity;
                 DBContext.SaveChanges();
             }
@@ -95,7 +95,7 @@ namespace DataAccess
             List<ServiceScheduler> result = new List<ServiceScheduler>();
             try
             {
-                var DBContext = new CatDogLoverContext();
+                var DBContext = new PRN231Context();
                 result = DBContext.ServiceSchedulers.ToList();
             }
             catch (Exception ex)

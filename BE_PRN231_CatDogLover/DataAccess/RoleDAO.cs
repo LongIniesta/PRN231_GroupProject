@@ -31,7 +31,7 @@ namespace DataAccess
             Role result = null;
             try
             {
-                var DBContext = new CatDogLoverContext();
+                var DBContext = new PRN231Context();
                 result = DBContext.Roles.SingleOrDefault(u => u.RoleId == id);
             }
             catch (Exception ex)
@@ -47,7 +47,7 @@ namespace DataAccess
             Role result;
             try
             {
-                var DBContext = new CatDogLoverContext();
+                var DBContext = new PRN231Context();
                 result = DBContext.Roles.Add(Role).Entity;
                 DBContext.SaveChanges();
             }
@@ -64,7 +64,7 @@ namespace DataAccess
             Role Role = GetByID(id);
             try
             {
-                var DBContext = new CatDogLoverContext();
+                var DBContext = new PRN231Context();
                 result = DBContext.Roles.Remove(Role).Entity;
                 DBContext.SaveChanges();
             }
@@ -79,7 +79,7 @@ namespace DataAccess
             Role result;
             try
             {
-                var DBContext = new CatDogLoverContext();
+                var DBContext = new PRN231Context();
                 result = DBContext.Roles.Update(Role).Entity;
                 DBContext.SaveChanges();
             }
@@ -95,7 +95,7 @@ namespace DataAccess
             List<Role> result = new List<Role>();
             try
             {
-                var DBContext = new CatDogLoverContext();
+                var DBContext = new PRN231Context();
                 result = DBContext.Roles.ToList();
             }
             catch (Exception ex)

@@ -33,7 +33,7 @@ namespace BE_PRN231_CatDogLover.Controllers
             serviceSchedulerRepository = new ServiceSchedulerRepository();
         }
 
-        [AllowAnonymous]
+        [Authorize]
         [HttpPost]
         public IActionResult UpLoadPost([FromBody] PostDTO postDTO)
         {
@@ -138,7 +138,7 @@ namespace BE_PRN231_CatDogLover.Controllers
         /// </summary>
         /// <param name="searchRequest"></param>
         /// <returns></returns>
-        [AllowAnonymous]
+        [Authorize]
         [HttpGet("/detail")]
         public async Task<IActionResult> SearchDetailList(PostSearchRequest searchRequest)
         {
@@ -159,7 +159,7 @@ namespace BE_PRN231_CatDogLover.Controllers
         /// </summary>
         /// <param name="searchRequest"></param>
         /// <returns></returns>
-        [AllowAnonymous]
+        [Authorize]
         [HttpGet("/general")]
         public async Task<IActionResult> SearchGeneralList(PostSearchRequest searchRequest)
         {
@@ -175,7 +175,7 @@ namespace BE_PRN231_CatDogLover.Controllers
             }
         }
 
-        [AllowAnonymous]
+        [Authorize]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {

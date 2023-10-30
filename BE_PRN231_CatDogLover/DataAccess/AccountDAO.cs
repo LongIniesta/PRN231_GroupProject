@@ -32,7 +32,7 @@ namespace DataAccess
             try
             {
                 Account? result = null;
-                var DBContext = new CatDogLoverContext();
+                var DBContext = new PRN231Context();
                 result = await DBContext.Accounts.Include(a => a.Role).FirstOrDefaultAsync(u => u.AccountId == id);
                 return result != null ? result : throw new Exception("Not found account!");
             }
@@ -47,7 +47,7 @@ namespace DataAccess
             Account? result = null;
             try
             {   
-                var DBContext = new CatDogLoverContext();
+                var DBContext = new PRN231Context();
                 result = await DBContext.Accounts.Include(a => a.Role).FirstOrDefaultAsync(u => u.RefreshToken == token);
             }
             catch (Exception ex)
@@ -57,14 +57,14 @@ namespace DataAccess
             return result;
         }
 
-        public async Task<Account> AddAccount(Account Account)
+        public Account AddAccount(Account Account)
         {
             Account result;
             try
             {
-                var DBContext = new CatDogLoverContext();
+                var DBContext = new PRN231Context();
                 result = DBContext.Accounts.Add(Account).Entity;
-                await DBContext.SaveChangesAsync();
+                DBContext.SaveChanges();
             }
             catch (Exception ex)
             {
@@ -79,7 +79,7 @@ namespace DataAccess
             Account Account = await GetByID(id);
             try
             {
-                var DBContext = new CatDogLoverContext();
+                var DBContext = new PRN231Context();
                 result = DBContext.Accounts.Remove(Account).Entity;
                 await DBContext.SaveChangesAsync();
             }
@@ -94,7 +94,7 @@ namespace DataAccess
             Account result;
             try
             {
-                var DBContext = new CatDogLoverContext();
+                var DBContext = new PRN231Context();
                 result = DBContext.Accounts.Update(Account).Entity;
                 await DBContext.SaveChangesAsync();
             }
@@ -112,7 +112,7 @@ namespace DataAccess
             result.Version = result.Version + 1;
             try
             {
-                var DBContext = new CatDogLoverContext();
+                var DBContext = new PRN231Context();
                 result = DBContext.Accounts.Update(result).Entity;
                 await DBContext.SaveChangesAsync();
             }
@@ -128,7 +128,7 @@ namespace DataAccess
             List<Account> result = new List<Account>();
             try
             {
-                var DBContext = new CatDogLoverContext();
+                var DBContext = new PRN231Context();
                 result = DBContext.Accounts.Include(a => a.Role).ToList();
             }
             catch (Exception ex)

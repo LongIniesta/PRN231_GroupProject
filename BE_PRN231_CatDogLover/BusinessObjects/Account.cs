@@ -11,8 +11,6 @@ namespace BusinessObjects
             Orders = new HashSet<Order>();
             Posts = new HashSet<Post>();
             Reacts = new HashSet<React>();
-            ReportedPeople = new HashSet<Account>();
-            Reporters = new HashSet<Account>();
         }
 
         public int AccountId { get; set; }
@@ -36,8 +34,5 @@ namespace BusinessObjects
         public virtual ICollection<Order> Orders { get; set; }
         public virtual ICollection<Post> Posts { get; set; }
         public virtual ICollection<React> Reacts { get; set; }
-
-        public virtual ICollection<Account> ReportedPeople { get; set; }
-        public virtual ICollection<Account> Reporters { get; set; }
     }
 }

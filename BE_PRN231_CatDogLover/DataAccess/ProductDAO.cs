@@ -31,7 +31,7 @@ namespace DataAccess
             Product result = null;
             try
             {
-                var DBContext = new CatDogLoverContext();
+                var DBContext = new PRN231Context();
                 result = DBContext.Products.SingleOrDefault(u => u.ProductId == id);
             }
             catch (Exception ex)
@@ -43,7 +43,7 @@ namespace DataAccess
         private string getNewId()
         {
             string result = "PD";
-            var DBContext = new CatDogLoverContext();
+            var DBContext = new PRN231Context();
             if (DBContext.Products.Count() <= 0) result += "1";
             else
             {
@@ -59,7 +59,7 @@ namespace DataAccess
             Product result;
             try
             {
-                var DBContext = new CatDogLoverContext();
+                var DBContext = new PRN231Context();
                 Product.ProductId = getNewId();
                 result = DBContext.Products.Add(Product).Entity;
                 DBContext.SaveChanges();
@@ -77,7 +77,7 @@ namespace DataAccess
             Product Product = GetByID(id);
             try
             {
-                var DBContext = new CatDogLoverContext();
+                var DBContext = new PRN231Context();
                 result = DBContext.Products.Remove(Product).Entity;
                 DBContext.SaveChanges();
             }
@@ -92,7 +92,7 @@ namespace DataAccess
             Product result;
             try
             {
-                var DBContext = new CatDogLoverContext();
+                var DBContext = new PRN231Context();
                 result = DBContext.Products.Update(Product).Entity;
                 DBContext.SaveChanges();
             }
@@ -108,7 +108,7 @@ namespace DataAccess
             List<Product> result = new List<Product>();
             try
             {
-                var DBContext = new CatDogLoverContext();
+                var DBContext = new PRN231Context();
                 result = DBContext.Products.ToList();
             }
             catch (Exception ex)

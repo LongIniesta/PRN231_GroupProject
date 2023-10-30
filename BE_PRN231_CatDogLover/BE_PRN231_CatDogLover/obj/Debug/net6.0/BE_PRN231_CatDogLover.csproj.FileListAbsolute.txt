@@ -251,3 +251,6 @@ D:\Documents\WorkSpace\Repos\prn231_catdogloverplatform\BE_PRN231_CatDogLover\BE
 D:\Documents\WorkSpace\Repos\prn231_catdogloverplatform\BE_PRN231_CatDogLover\BE_PRN231_CatDogLover\bin\Debug\net6.0\Microsoft.AspNet.OData.dll
 D:\Documents\WorkSpace\Repos\prn231_catdogloverplatform\BE_PRN231_CatDogLover\BE_PRN231_CatDogLover\bin\Debug\net6.0\System.Net.Http.Formatting.dll
 D:\Documents\WorkSpace\Repos\prn231_catdogloverplatform\BE_PRN231_CatDogLover\BE_PRN231_CatDogLover\bin\Debug\net6.0\System.Web.Http.dll
+D:\FA23\PRN231\PRN231_GroupProject\BE_PRN231_CatDogLover\BE_PRN231_CatDogLover\bin\Debug\net6.0\Microsoft.AspNet.OData.dll
+D:\FA23\PRN231\PRN231_GroupProject\BE_PRN231_CatDogLover\BE_PRN231_CatDogLover\bin\Debug\net6.0\System.Net.Http.Formatting.dll
+D:\FA23\PRN231\PRN231_GroupProject\BE_PRN231_CatDogLover\BE_PRN231_CatDogLover\bin\Debug\net6.0\System.Web.Http.dll

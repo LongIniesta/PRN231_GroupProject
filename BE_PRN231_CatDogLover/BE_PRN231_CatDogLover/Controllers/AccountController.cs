@@ -29,7 +29,7 @@ namespace BE_PRN231_CatDogLover.Controllers
             _accountRepository = new AccountRepository();
         }
 
-        [AllowAnonymous]
+        [Authorize(Policy = "AdminOrStaff")]
         [HttpGet]
         public IActionResult Get([FromQuery] AccountSearchRequest searchRequest)
         {
@@ -49,7 +49,7 @@ namespace BE_PRN231_CatDogLover.Controllers
         /// </summary>
         /// <param name="searchRequest"></param>
         /// <returns>List of account</returns>
-        [AllowAnonymous]
+        [Authorize(Policy = "AdminOrStaff")]
         [HttpGet("/new")]
         public async Task<IActionResult> Search(AccountSearchRequest searchRequest)
         {
@@ -65,7 +65,7 @@ namespace BE_PRN231_CatDogLover.Controllers
             }
         }
 
-        [AllowAnonymous]
+        [Authorize]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
@@ -86,7 +86,7 @@ namespace BE_PRN231_CatDogLover.Controllers
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        [AllowAnonymous]
+        [Authorize(Roles = "admin")]
         [HttpPost("CreateAccount")]
         public async Task<ActionResult<AccountDTO>> CreateAccount(AccountCreateRequest request)
         {
@@ -115,7 +115,7 @@ namespace BE_PRN231_CatDogLover.Controllers
             return Created("", _mapper.Map<AccountDTO>(account));
         }
 
-        [AllowAnonymous]
+        [Authorize(Policy = "AdminOrStaff")]
         [HttpDelete("Ban")]
         public async Task<ActionResult<string>> Ban([FromQuery] int id, string reason)
         {
@@ -147,7 +147,7 @@ namespace BE_PRN231_CatDogLover.Controllers
             }
         }
 
-        [AllowAnonymous]
+        [Authorize]
         [HttpPut("UpdateProfile")]
         public async Task<ActionResult<AccountDTO>> Update(AccountUpdateProfileRequest updateRequest)
         {
@@ -167,7 +167,7 @@ namespace BE_PRN231_CatDogLover.Controllers
             }
         }
 
-        [AllowAnonymous]
+        [Authorize]
         [HttpPut("ResetPassword")]
         public async Task<ActionResult<string>> ResetPassword(AccountResetPassword request)
         {
@@ -183,7 +183,7 @@ namespace BE_PRN231_CatDogLover.Controllers
             }
         }
 
-        [AllowAnonymous]
+        [Authorize]
         [HttpPut("ForgetPassword")]
         public async Task<ActionResult<string>> ForgetPassword(int id)
         {

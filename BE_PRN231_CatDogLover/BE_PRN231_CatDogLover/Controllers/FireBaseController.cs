@@ -1,11 +1,11 @@
 ﻿using Firebase.Auth;
 using Firebase.Storage;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Web.Http;
 
 namespace BE_PRN231_CatDogLover.Controllers
 {
-    [Route("api/[controller]")]
+    [Microsoft.AspNetCore.Mvc.Route("api/[controller]")]
     [ApiController]
     public class FireBaseController : ControllerBase
     {
@@ -13,7 +13,10 @@ namespace BE_PRN231_CatDogLover.Controllers
         private static string Butket = "voicespire-7162e.appspot.com";
         private static string AuthEmail = "baolongtp54@gmail.com";
         private static string AuthPassword = "123456";
-        [HttpPost("UploadImageFile")]
+
+
+       // [Authorize]
+        [Microsoft.AspNetCore.Mvc.HttpPost("UploadImageFile")]
         public async Task<IActionResult> UploadImage(IFormFile file)
         {
             FileStream stream;

@@ -5,11 +5,16 @@ namespace BusinessObjects
 {
     public partial class Item
     {
+        public Item()
+        {
+            OrderDetails = new HashSet<OrderDetail>();
+        }
+
         public string ItemId { get; set; } = null!;
         public string ItemType { get; set; } = null!;
 
-        public virtual OrderDetail? OrderDetail { get; set; }
         public virtual Product? Product { get; set; }
         public virtual ServiceScheduler? ServiceScheduler { get; set; }
+        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
     }
 }
