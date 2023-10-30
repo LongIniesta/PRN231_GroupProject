@@ -2,12 +2,14 @@
 using BusinessObjects;
 using DTOs;
 using DTOs.Account;
+using DTOs.Pagination;
 using DTOs.Post;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Repositories;
 using Repositories.Interface;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace BE_PRN231_CatDogLover.Controllers
 {
@@ -144,9 +146,9 @@ namespace BE_PRN231_CatDogLover.Controllers
         {
             try
             {
-                var notMappedResponse = postRepository.Search(searchRequest);
-                var response = mapper.Map<List<PostDTO>>(notMappedResponse.Data);
-                return Ok(response);
+                var query = postRepository.Search(searchRequest);
+                var response = mapper.Map<List<PostDTO>>(query.Data);
+                return Ok(new PagedList<PostDTO>(response, query.TotalResult, query.CurrentPage, query.Size));
             }
             catch (Exception ex)
             {
@@ -165,9 +167,9 @@ namespace BE_PRN231_CatDogLover.Controllers
         {
             try
             {
-                var notMappedResponse = postRepository.Search(searchRequest);
-                var response = mapper.Map<List<PostGeneralInformationResponse>>(notMappedResponse.Data);
-                return Ok(response);
+                var query = postRepository.Search(searchRequest);
+                var response = mapper.Map<List<PostGeneralInformationResponse>>(query.Data);
+                return Ok(new PagedList<PostGeneralInformationResponse>(response, query.TotalResult, query.CurrentPage, query.Size));
             }
             catch (Exception ex)
             {

@@ -57,14 +57,14 @@ namespace DataAccess
             return result;
         }
 
-        public Account AddAccount(Account Account)
+        public async Task<Account> AddAccount(Account Account)
         {
             Account result;
             try
             {
                 var DBContext = new PRN231Context();
                 result = DBContext.Accounts.Add(Account).Entity;
-                DBContext.SaveChanges();
+                await DBContext.SaveChangesAsync();
             }
             catch (Exception ex)
             {

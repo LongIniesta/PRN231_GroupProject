@@ -49,16 +49,16 @@ namespace BE_PRN231_CatDogLover.Controllers
         /// </summary>
         /// <param name="searchRequest"></param>
         /// <returns>List of account</returns>
-        //[Authorize(Policy = "AdminOrStaff")]
-        [AllowAnonymous]
+        [Authorize(Policy = "AdminOrStaff")]
         [HttpGet("new")]
         public IActionResult Search([FromQuery] AccountSearchRequest searchRequest)
         {
             try
             {
-                var notMappedResponse = _accountRepository.Search(searchRequest);
-                var response = _mapper.Map<List<AccountDTO>>(notMappedResponse.Data);
-                return Ok(response);
+                var query = _accountRepository.Search(searchRequest);
+                var response = _mapper.Map<List<AccountDTO>>(query.Data);
+                return Ok(new PagedList<AccountDTO>(response, query.TotalResult, query.CurrentPage, query.Size));
+                
             }
             catch (Exception ex)
             {
@@ -66,8 +66,7 @@ namespace BE_PRN231_CatDogLover.Controllers
             }
         }
 
-        //[Authorize]
-        [AllowAnonymous]
+        [Authorize]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
@@ -88,8 +87,7 @@ namespace BE_PRN231_CatDogLover.Controllers
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        //[Authorize(Roles = "admin")]
-        [AllowAnonymous]
+        [Authorize(Roles = "admin")]
         [HttpPost("CreateAccount")]
         public async Task<ActionResult<AccountDTO>> CreateAccount(AccountCreateRequest request)
         {
@@ -150,8 +148,7 @@ namespace BE_PRN231_CatDogLover.Controllers
             }
         }
 
-        //[Authorize]
-        [AllowAnonymous]
+        [Authorize]
         [HttpPut("UpdateProfile")]
         public async Task<ActionResult<AccountDTO>> Update(AccountUpdateProfileRequest updateRequest)
         {
