@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Repositories.Interface;
@@ -44,12 +44,27 @@ namespace BE_PRN231_CatDogLover.Controllers
             }
         }
 
+        [Authorize]
+        [HttpGet("countNewUserToday")]
+        public IActionResult countNewUser() {
+            int result;
+            try {
+                result = _accountRepository.GetAll().Count(a => a.RoleId == 1 && a.CreateDate > DateTime.Today);
+            } catch (Exception ex) { 
+                return BadRequest(ex.Message);
+            }
+            
+            return Ok(result);
+        }
+
+
         /// <summary>
         /// 🌟NEW🌟 for search with pagination
         /// </summary>
         /// <param name="searchRequest"></param>
         /// <returns>List of account</returns>
-        [Authorize(Policy = "AdminOrStaff")]
+        //[Authorize(Policy = "AdminOrStaff")]
+        [Authorize]
         [HttpGet("new")]
         public IActionResult Search([FromQuery] AccountSearchRequest searchRequest)
         {
@@ -66,6 +81,7 @@ namespace BE_PRN231_CatDogLover.Controllers
             }
         }
 
+        //[Authorize]
         [Authorize]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
@@ -87,7 +103,8 @@ namespace BE_PRN231_CatDogLover.Controllers
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        [Authorize(Roles = "admin")]
+        //[Authorize(Roles = "admin")]
+        [Authorize]
         [HttpPost("CreateAccount")]
         public async Task<ActionResult<AccountDTO>> CreateAccount(AccountCreateRequest request)
         {
@@ -148,6 +165,7 @@ namespace BE_PRN231_CatDogLover.Controllers
             }
         }
 
+        //[Authorize]
         [Authorize]
         [HttpPut("UpdateProfile")]
         public async Task<ActionResult<AccountDTO>> Update(AccountUpdateProfileRequest updateRequest)

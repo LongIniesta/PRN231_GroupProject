@@ -8253,19 +8253,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\hoang\\.nuget\\packages\\": {}
+    "C:\\Users\\baolo\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Documents\\WorkSpace\\Repos\\prn231_catdogloverplatform\\BE_PRN231_CatDogLover\\BE_PRN231_CatDogLover\\BE_PRN231_CatDogLover.csproj",
+      "projectUniqueName": "D:\\FA23\\PRN231\\PRN231_GroupProject\\BE_PRN231_CatDogLover\\BE_PRN231_CatDogLover\\BE_PRN231_CatDogLover.csproj",
       "projectName": "BE_PRN231_CatDogLover",
-      "projectPath": "D:\\Documents\\WorkSpace\\Repos\\prn231_catdogloverplatform\\BE_PRN231_CatDogLover\\BE_PRN231_CatDogLover\\BE_PRN231_CatDogLover.csproj",
-      "packagesPath": "C:\\Users\\hoang\\.nuget\\packages\\",
-      "outputPath": "D:\\Documents\\WorkSpace\\Repos\\prn231_catdogloverplatform\\BE_PRN231_CatDogLover\\BE_PRN231_CatDogLover\\obj\\",
+      "projectPath": "D:\\FA23\\PRN231\\PRN231_GroupProject\\BE_PRN231_CatDogLover\\BE_PRN231_CatDogLover\\BE_PRN231_CatDogLover.csproj",
+      "packagesPath": "C:\\Users\\baolo\\.nuget\\packages\\",
+      "outputPath": "D:\\FA23\\PRN231\\PRN231_GroupProject\\BE_PRN231_CatDogLover\\BE_PRN231_CatDogLover\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\hoang\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\baolo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -8273,18 +8278,17 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\sdk\\7.0.302\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "D:\\Documents\\WorkSpace\\Repos\\prn231_catdogloverplatform\\BE_PRN231_CatDogLover\\AutoMapping\\AutoMapping.csproj": {
-              "projectPath": "D:\\Documents\\WorkSpace\\Repos\\prn231_catdogloverplatform\\BE_PRN231_CatDogLover\\AutoMapping\\AutoMapping.csproj"
+            "D:\\FA23\\PRN231\\PRN231_GroupProject\\BE_PRN231_CatDogLover\\AutoMapping\\AutoMapping.csproj": {
+              "projectPath": "D:\\FA23\\PRN231\\PRN231_GroupProject\\BE_PRN231_CatDogLover\\AutoMapping\\AutoMapping.csproj"
             },
-            "D:\\Documents\\WorkSpace\\Repos\\prn231_catdogloverplatform\\BE_PRN231_CatDogLover\\Repositories\\Repositories.csproj": {
-              "projectPath": "D:\\Documents\\WorkSpace\\Repos\\prn231_catdogloverplatform\\BE_PRN231_CatDogLover\\Repositories\\Repositories.csproj"
+            "D:\\FA23\\PRN231\\PRN231_GroupProject\\BE_PRN231_CatDogLover\\Repositories\\Repositories.csproj": {
+              "projectPath": "D:\\FA23\\PRN231\\PRN231_GroupProject\\BE_PRN231_CatDogLover\\Repositories\\Repositories.csproj"
             }
           }
         }
@@ -8347,7 +8351,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.414\\RuntimeIdentifierGraph.json"
       }
     }
   },
