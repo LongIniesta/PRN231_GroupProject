@@ -139,7 +139,7 @@ namespace BE_PRN231_CatDogLover.Controllers
         /// <param name="searchRequest"></param>
         /// <returns></returns>
         [AllowAnonymous]
-        [HttpGet]
+        [HttpGet("/detail")]
         public async Task<IActionResult> SearchDetailList(PostSearchRequest searchRequest)
         {
             try
@@ -160,7 +160,7 @@ namespace BE_PRN231_CatDogLover.Controllers
         /// <param name="searchRequest"></param>
         /// <returns></returns>
         [AllowAnonymous]
-        [HttpGet]
+        [HttpGet("/general")]
         public async Task<IActionResult> SearchGeneralList(PostSearchRequest searchRequest)
         {
             try

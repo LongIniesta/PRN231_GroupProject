@@ -50,7 +50,7 @@ namespace BE_PRN231_CatDogLover.Controllers
         /// <param name="searchRequest"></param>
         /// <returns>List of account</returns>
         [AllowAnonymous]
-        [HttpGet]
+        [HttpGet("/new")]
         public async Task<IActionResult> Search(AccountSearchRequest searchRequest)
         {
             try
