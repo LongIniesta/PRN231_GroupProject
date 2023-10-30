@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using BusinessObjects;
 using DTOs;
+using DTOs.Account;
+using DTOs.Post;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -28,7 +30,7 @@ namespace BE_PRN231_CatDogLover.Controllers
             productRepository = new ProductRepository();
             giftRepository = new GiftRepository();
             serviceRepository = new ServiceRepository();
-            serviceSchedulerRepository = new ServiceSchedulerRepository();  
+            serviceSchedulerRepository = new ServiceSchedulerRepository();
         }
 
         [AllowAnonymous]
@@ -127,9 +129,67 @@ namespace BE_PRN231_CatDogLover.Controllers
                 || (r.StartDate <= list[i].EndDate && list[i].EndDate <= r.EndDate)
                 || (list[i].StartDate <= r.StartDate && list[i].EndDate >= r.EndDate))) > 1) {
                     return false;
-                } 
+                }
             }
             return true;
         }
+        /// <summary>
+        /// Get the list of Posts include other tables (Gifts, Products, Services)
+        /// </summary>
+        /// <param name="searchRequest"></param>
+        /// <returns></returns>
+        [AllowAnonymous]
+        [HttpGet]
+        public async Task<IActionResult> SearchDetailList(PostSearchRequest searchRequest)
+        {
+            try
+            {
+                var notMappedResponse = await postRepository.Search(searchRequest);
+                var response = mapper.Map<List<PostDTO>>(notMappedResponse.Data);
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Get the list of Posts NOT include any other tables
+        /// </summary>
+        /// <param name="searchRequest"></param>
+        /// <returns></returns>
+        [AllowAnonymous]
+        [HttpGet]
+        public async Task<IActionResult> SearchGeneralList(PostSearchRequest searchRequest)
+        {
+            try
+            {
+                var notMappedResponse = await postRepository.Search(searchRequest);
+                var response = mapper.Map<List<PostGeneralInformationResponse>>(notMappedResponse.Data);
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [AllowAnonymous]
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(int id)
+        {
+            try
+            {
+                var notMappedResponse = await postRepository.GetPostByIdAsync(id);
+                var response = mapper.Map<PostDTO>(notMappedResponse);
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
     }
 }

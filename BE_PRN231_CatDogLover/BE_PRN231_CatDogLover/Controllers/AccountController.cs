@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.OData.Routing.Controllers;
 using Microsoft.AspNetCore.OData.Query;
 using System.Security.Claims;
 using Microsoft.AspNet.OData;
+using DTOs.Pagination;
 
 namespace BE_PRN231_CatDogLover.Controllers
 {
@@ -34,7 +35,7 @@ namespace BE_PRN231_CatDogLover.Controllers
         {
             try
             {
-                var response = _mapper.ProjectTo<AccountDTO>(_accountRepository.Search(searchRequest));
+                var response = _mapper.ProjectTo<AccountDTO>(_accountRepository.SearchWithoutPagiantion(searchRequest));
                 return Ok(response);
             }
             catch (Exception ex)
@@ -43,21 +44,76 @@ namespace BE_PRN231_CatDogLover.Controllers
             }
         }
 
-        /*  [AllowAnonymous]
-          [HttpGet]
-          [EnableQuery]
-          public ActionResult<List<AccountDTO>> GetAccounts()
-          {
-              try
-              {
-                  List<Account> result = _accountRepository.GetAll().ToList();
-                  return _mapper.Map<List<AccountDTO>>(result);
-              }
-              catch (Exception ex)
-              {
-                  return new BadRequestObjectResult(ex.Message);
-              }
-          }*/
+        /// <summary>
+        /// 🌟NEW🌟 for search with pagination
+        /// </summary>
+        /// <param name="searchRequest"></param>
+        /// <returns>List of account</returns>
+        [AllowAnonymous]
+        [HttpGet]
+        public async Task<IActionResult> Search(AccountSearchRequest searchRequest)
+        {
+            try
+            {
+                var notMappedResponse = await _accountRepository.Search(searchRequest);
+                var response = _mapper.Map<List<AccountDTO>>(notMappedResponse.Data);
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [AllowAnonymous]
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(int id)
+        {
+            try
+            {
+                var notMappedResponse = await _accountRepository.GetAccountById(id);
+                var response = _mapper.Map<AccountDTO>(notMappedResponse);
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Create account for admin level
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [AllowAnonymous]
+        [HttpPost("CreateAccount")]
+        public async Task<ActionResult<AccountDTO>> CreateAccount(AccountCreateRequest request)
+        {
+            if (!ModelState.IsValid) return BadRequest("Data invalid");
+            if (request.PasswordConfirm != request.Password)
+            {
+                return BadRequest("Password not match with confirm");
+            }
+            if (_accountRepository.GetAll().Any(a => a.Email.ToLower().Trim() == request.Email.ToLower().Trim()))
+            {
+                return BadRequest("Email are already exist");
+            }
+            Account account = new Account();
+            try
+            {
+                account = _mapper.Map<Account>(request);
+                account.CreateDate = DateTime.Now;
+                account.Status = true;
+                account.Version = 1;
+                await _accountRepository.AddAccount(account);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            return Created("", _mapper.Map<AccountDTO>(account));
+        }
 
         [AllowAnonymous]
         [HttpDelete("Ban")]
@@ -93,7 +149,7 @@ namespace BE_PRN231_CatDogLover.Controllers
 
         [AllowAnonymous]
         [HttpPut("UpdateProfile")]
-        public async Task<ActionResult<AccountDTO>> Update([FromForm] AccountUpdateProfileRequest updateRequest)
+        public async Task<ActionResult<AccountDTO>> Update(AccountUpdateProfileRequest updateRequest)
         {
             try
             {

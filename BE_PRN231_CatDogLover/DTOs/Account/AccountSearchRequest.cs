@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DTOs.Pagination;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DTOs.Account
 {
-    public class AccountSearchRequest
+    public class AccountSearchRequest : BasePagingSearchRequest
     {
         public string? Email { get; set; }
         public string? FullName { get; set; }

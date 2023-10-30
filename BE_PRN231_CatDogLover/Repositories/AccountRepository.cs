@@ -1,6 +1,8 @@
 ﻿using BusinessObjects;
 using DataAccess;
+using DTOs;
 using DTOs.Account;
+using DTOs.Pagination;
 using Repositories.Interface;
 using Repositories.Utility;
 using System.Net;
@@ -10,7 +12,7 @@ namespace Repositories
 {
     public class AccountRepository : IAccountRepository
     {
-        public Account AddAccount(Account account) => AccountDAO.Instance.AddAccount(account);
+        public async Task<Account> AddAccount(Account account) => await AccountDAO.Instance.AddAccount(account);
 
         public IEnumerable<Account> GetAll() => AccountDAO.Instance.GetAll();
 
@@ -42,15 +44,17 @@ namespace Repositories
             }
         }
 
-        public IQueryable<Account> Search(AccountSearchRequest searchRequest)
+        public async Task<PagedList<Account>> Search(AccountSearchRequest searchRequest)
         {
-
             var query = AccountDAO.Instance.GetAll().AsQueryable();
             // Apply search
             query = query.GetWithSearch(searchRequest).AsQueryable();
             // Apply sort
             //response.GetWithSort();
-            return query;
+            // Apply pagination
+            var pagingData = await query.GetWithPaging(searchRequest);
+
+            return pagingData;
         }
 
         public async Task BanAccountAsync(int id, string reason)
@@ -64,6 +68,16 @@ namespace Repositories
                     account.BanReason = reason;
                     await AccountDAO.Instance.UpdateAccount(account);
                     SendBanNotificationEmail(account.Email, reason, "BAN_REASON");
+
+                    var relatedPosts = PostDAO.Instance.GetAll().Where(p => p.OwnerId == id);
+                    if (relatedPosts != null)
+                    {
+                        foreach(var post in relatedPosts) 
+                        {
+                            post.Status = false;
+                            PostDAO.Instance.UpdatePost(post);
+                        }
+                    }
                 }
                 else throw new Exception("Account has already been banned!");
             }
@@ -82,6 +96,16 @@ namespace Repositories
                 {
                     account.Status = true;
                     await AccountDAO.Instance.UpdateAccount(account);
+
+                    var relatedPosts = PostDAO.Instance.GetAll().Where(p => p.OwnerId == id);
+                    if (relatedPosts != null)
+                    {
+                        foreach (var post in relatedPosts)
+                        {
+                            post.Status = true;
+                            PostDAO.Instance.UpdatePost(post);
+                        }
+                    }
                 }
                 else
                 {
@@ -169,5 +193,16 @@ namespace Repositories
         public Task<Account> UpdateVersion(int id) => AccountDAO.Instance.UpdateVersion(id);
 
         public Task<Account> GetByRefreshToken(string token) => AccountDAO.Instance.GetByRefreshToken(token);
+
+        public IQueryable<Account> SearchWithoutPagiantion(AccountSearchRequest searchRequest)
+        {
+            var query = AccountDAO.Instance.GetAll().AsQueryable();
+            // Apply search
+            query = query.GetWithSearch(searchRequest).AsQueryable();
+            // Apply sort
+            //response.GetWithSort();
+
+            return query;
+        }
     }
 }

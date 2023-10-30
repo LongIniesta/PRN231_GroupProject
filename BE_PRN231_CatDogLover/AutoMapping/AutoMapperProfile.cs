@@ -2,6 +2,7 @@ using AutoMapper;
 using BusinessObjects;
 using DTOs;
 using DTOs.Account;
+using DTOs.Post;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,6 +28,7 @@ namespace AutoMapping
 
             //Hiep
             CreateMap<AccountUpdateProfileRequest, Account>().ReverseMap();
+            CreateMap<PostGeneralInformationResponse, Post>().ReverseMap();
         }
     }
 }

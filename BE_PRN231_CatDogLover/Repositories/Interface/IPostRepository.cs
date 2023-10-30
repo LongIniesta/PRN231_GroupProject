@@ -1,4 +1,7 @@
 ﻿using BusinessObjects;
+using DTOs.Account;
+using DTOs.Pagination;
+using DTOs.Post;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,5 +17,7 @@ namespace Repositories.Interface
         Post RemovePost(int id);
         Post UpdatePost(Post Post);
         IEnumerable<Post> GetAll();
+        Task<Post> GetPostByIdAsync(int id);
+        Task<PagedList<Post>> Search(PostSearchRequest searchRequest);
     }
 }

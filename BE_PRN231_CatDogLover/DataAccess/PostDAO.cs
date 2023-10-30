@@ -1,4 +1,5 @@
 ﻿using BusinessObjects;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,6 +40,21 @@ namespace DataAccess
                 throw new Exception(ex.Message);
             }
             return result;
+        }
+
+        public async Task<Post> GetByIDAsync(int id)
+        {
+            try
+            {
+                Post? result = null;
+                var DBContext = new CatDogLoverContext();
+                result = await DBContext.Posts.FirstOrDefaultAsync(u => u.PostId == id);
+                return result != null ? result : throw new Exception("Not found post!");
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
 
