@@ -191,5 +191,24 @@ namespace BE_PRN231_CatDogLover.Controllers
             }
         }
 
+        [Authorize]
+        [HttpGet("getStatitic")]
+        public async Task<ActionResult<PostStatitic>> GetStatitic()
+        {
+            try
+            {
+                PostStatitic postStatitic = new PostStatitic { 
+                    postToday = postRepository.GetAll().Count(p => p.CreateDate > DateTime.Today),
+                    postTotal = postRepository.GetAll().Count()
+                };
+                return Ok(postStatitic);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+
     }
 }

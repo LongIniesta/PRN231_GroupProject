@@ -12,7 +12,7 @@ namespace Repositories
 {
     public class AccountRepository : IAccountRepository
     {
-        public async Task<Account> AddAccount(Account account) => await AccountDAO.Instance.AddAccount(account);
+        public async Task<Account> AddAccount(Account account) => AccountDAO.Instance.AddAccount(account);
 
         public IEnumerable<Account> GetAll() => AccountDAO.Instance.GetAll();
 
