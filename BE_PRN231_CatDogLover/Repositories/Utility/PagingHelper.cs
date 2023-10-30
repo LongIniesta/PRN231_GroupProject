@@ -10,7 +10,7 @@ namespace Repositories.Utility
 {
     public static class PagingHelper
     {
-        public static async Task<PagedList<T>> GetWithPaging<T>(
+        public static PagedList<T> GetWithPaging<T>(
             this IQueryable<T> source,
             BasePagingSearchRequest requestParam)
         {
@@ -19,9 +19,9 @@ namespace Repositories.Utility
             requestParam.PageSize = requestParam.PageSize < 1 ? 1 : requestParam.PageSize;
             requestParam.Page = requestParam.Page < 1 ? 1 : requestParam.Page;
 
-            var items = await source
+            var items =  source
                 .Skip(requestParam.Page == 1 ? 0 : requestParam.PageSize * (requestParam.Page - 1)) // Paging
-                .Take(requestParam.PageSize).ToListAsync(); // Take only a number of items
+                .Take(requestParam.PageSize).ToList(); // Take only a number of items
 
             return new PagedList<T>(items, count, requestParam.Page, requestParam.PageSize);
         }

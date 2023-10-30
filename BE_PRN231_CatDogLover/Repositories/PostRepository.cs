@@ -37,7 +37,7 @@ namespace Repositories
             }
         }
 
-        public async Task<PagedList<Post>> Search(PostSearchRequest searchRequest)
+        public PagedList<Post> Search(PostSearchRequest searchRequest)
         {
             var query = PostDAO.Instance.GetAll().AsQueryable();
             // Apply search
@@ -45,7 +45,7 @@ namespace Repositories
             // Apply sort
             //response.GetWithSort();
             // Apply pagination
-            var pagingData = await query.GetWithPaging(searchRequest);
+            var pagingData = query.GetWithPaging(searchRequest);
 
             return pagingData;
         }

@@ -18,6 +18,6 @@ namespace Repositories.Interface
         Post UpdatePost(Post Post);
         IEnumerable<Post> GetAll();
         Task<Post> GetPostByIdAsync(int id);
-        Task<PagedList<Post>> Search(PostSearchRequest searchRequest);
+        PagedList<Post> Search(PostSearchRequest searchRequest);
     }
 }

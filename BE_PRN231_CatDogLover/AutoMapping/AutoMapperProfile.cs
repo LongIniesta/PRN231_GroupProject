@@ -29,6 +29,7 @@ namespace AutoMapping
             //Hiep
             CreateMap<AccountUpdateProfileRequest, Account>().ReverseMap();
             CreateMap<PostGeneralInformationResponse, Post>().ReverseMap();
+            CreateMap<AccountCreateRequest, Account>().ReverseMap();
         }
     }
 }

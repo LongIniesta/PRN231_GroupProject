@@ -139,12 +139,12 @@ namespace BE_PRN231_CatDogLover.Controllers
         /// <param name="searchRequest"></param>
         /// <returns></returns>
         [Authorize]
-        [HttpGet("/detail")]
-        public async Task<IActionResult> SearchDetailList(PostSearchRequest searchRequest)
+        [HttpGet("detail")]
+        public IActionResult SearchDetailList(PostSearchRequest searchRequest)
         {
             try
             {
-                var notMappedResponse = await postRepository.Search(searchRequest);
+                var notMappedResponse = postRepository.Search(searchRequest);
                 var response = mapper.Map<List<PostDTO>>(notMappedResponse.Data);
                 return Ok(response);
             }
@@ -160,12 +160,12 @@ namespace BE_PRN231_CatDogLover.Controllers
         /// <param name="searchRequest"></param>
         /// <returns></returns>
         [Authorize]
-        [HttpGet("/general")]
-        public async Task<IActionResult> SearchGeneralList(PostSearchRequest searchRequest)
+        [HttpGet("general")]
+        public  IActionResult SearchGeneralList(PostSearchRequest searchRequest)
         {
             try
             {
-                var notMappedResponse = await postRepository.Search(searchRequest);
+                var notMappedResponse = postRepository.Search(searchRequest);
                 var response = mapper.Map<List<PostGeneralInformationResponse>>(notMappedResponse.Data);
                 return Ok(response);
             }

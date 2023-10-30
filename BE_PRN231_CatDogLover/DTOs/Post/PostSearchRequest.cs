@@ -15,10 +15,10 @@ namespace DTOs.Post
         //query account owner instead
         //public int? OwnerId { get; set; }
         public string? Type { get; set; } = "";
-        [Required(ErrorMessage ="Lack of start date")]
-        public DateTime StartCreateDate { get; set; } = DateTime.MinValue;
-        [Required(ErrorMessage = "Lack of end date")]
-        public DateTime EndCreateDate { get; set; } = DateTime.MaxValue;
+        //[Required(ErrorMessage ="Lack of start date")]
+        //public DateTime StartCreateDate { get; set; } = DateTime.MinValue;
+        //[Required(ErrorMessage = "Lack of end date")]
+        //public DateTime EndCreateDate { get; set; } = DateTime.MaxValue;
         public bool Status { get; set; }
         public int? NumberOfReact { get; set; }
     }

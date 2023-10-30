@@ -12,7 +12,7 @@ namespace Repositories
 {
     public class AccountRepository : IAccountRepository
     {
-        public async Task<Account> AddAccount(Account account) =>  AccountDAO.Instance.AddAccount(account);
+        public async Task<Account> AddAccount(Account account) => await AccountDAO.Instance.AddAccount(account);
 
         public IEnumerable<Account> GetAll() => AccountDAO.Instance.GetAll();
 
@@ -44,7 +44,7 @@ namespace Repositories
             }
         }
 
-        public async Task<PagedList<Account>> Search(AccountSearchRequest searchRequest)
+        public PagedList<Account> Search(AccountSearchRequest searchRequest)
         {
             var query = AccountDAO.Instance.GetAll().AsQueryable();
             // Apply search
@@ -52,7 +52,7 @@ namespace Repositories
             // Apply sort
             //response.GetWithSort();
             // Apply pagination
-            var pagingData = await query.GetWithPaging(searchRequest);
+            var pagingData = query.GetWithPaging(searchRequest);
 
             return pagingData;
         }

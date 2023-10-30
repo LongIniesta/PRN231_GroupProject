@@ -17,7 +17,7 @@ namespace Repositories.Interface
         Task<Account> GetAccountById(int id);
         Task<Account> UpdateAccount(Account account);
         IEnumerable<Account> GetAll();
-        Task<PagedList<Account>> Search(AccountSearchRequest searchRequest);
+        PagedList<Account> Search(AccountSearchRequest searchRequest);
         IQueryable<Account> SearchWithoutPagiantion(AccountSearchRequest searchRequest);
         Task BanAccountAsync(int id, string reason);
         Task UnbanAccountAsync(int id);

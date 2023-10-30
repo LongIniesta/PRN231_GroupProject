@@ -9,6 +9,11 @@ namespace Repositories.Utility
         {
             foreach (var prop in searchModel.GetType().GetProperties())
             {
+                //properties that not valid in this filter
+                if(prop.Name == "Page" || prop.Name == "PageSize")
+                {
+                    continue;
+                }
                 var value = prop.GetValue(searchModel, null);
                 if (value is string)
                 {

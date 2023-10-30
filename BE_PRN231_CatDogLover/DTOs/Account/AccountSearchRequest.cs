@@ -14,9 +14,9 @@ namespace DTOs.Account
         public string? FullName { get; set; }
         public string? Phone { get; set; }
         public string? Address { get; set; }
-        [Required(ErrorMessage = "Lack of start date")]
-        public DateTime StartCreateDate { get; set; } = DateTime.MinValue;
-        [Required(ErrorMessage = "Lack of end date")]
-        public DateTime EndCreateDate { get; set; } = DateTime.MaxValue;
+        //[Required(ErrorMessage = "Lack of start date")]
+        //public DateTime? CreateDate { get; set; } = DateTime.MinValue;
+        //[Required(ErrorMessage = "Lack of end date")]
+        //public DateTime EndCreateDate { get; set; } = DateTime.MaxValue;
     }
 }
