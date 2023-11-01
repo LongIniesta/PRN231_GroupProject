@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.OData.Query;
 using System.Security.Claims;
 using Microsoft.AspNet.OData;
 using DTOs.Pagination;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace BE_PRN231_CatDogLover.Controllers
 {
@@ -70,9 +71,9 @@ namespace BE_PRN231_CatDogLover.Controllers
         {
             try
             {
-                var notMappedResponse = _accountRepository.Search(searchRequest);
-                var response = _mapper.Map<List<AccountDTO>>(notMappedResponse.Data);
-                return Ok(response);
+                var query = _accountRepository.Search(searchRequest);
+                var response = _mapper.Map<List<AccountDTO>>(query.Data);
+                return Ok(new PagedList<AccountDTO>(response, query.TotalResult, query.CurrentPage, query.Size));
             }
             catch (Exception ex)
             {

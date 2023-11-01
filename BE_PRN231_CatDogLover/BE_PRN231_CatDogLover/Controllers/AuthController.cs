@@ -127,7 +127,7 @@ namespace BE_PRN231_CatDogLover.Controllers
                 account.RoleId = 1;
                 account.Status = true;
                 account.Version = 1;
-                accountRepository.AddAccount(account);
+                await accountRepository.AddAccount(account);
             }
             catch (Exception ex)
             {
