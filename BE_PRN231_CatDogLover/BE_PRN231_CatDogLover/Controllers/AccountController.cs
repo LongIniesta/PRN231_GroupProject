@@ -50,7 +50,7 @@ namespace BE_PRN231_CatDogLover.Controllers
         public IActionResult countNewUser() {
             int result;
             try {
-                result = _accountRepository.GetAll().Count(a => a.RoleId == 1 && a.CreateDate > DateTime.Today);
+                result = _accountRepository.GetAll().Count(a => a.RoleId == 3 && a.CreateDate > DateTime.Today);
             } catch (Exception ex) { 
                 return BadRequest(ex.Message);
             }

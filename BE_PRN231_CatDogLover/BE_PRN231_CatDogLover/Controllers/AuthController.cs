@@ -124,7 +124,7 @@ namespace BE_PRN231_CatDogLover.Controllers
             {              
                 account = mapper.Map<Account>(register);
                 account.CreateDate = DateTime.Now;
-                account.RoleId = 1;
+                account.RoleId = 3;
                 account.Status = true;
                 account.Version = 1;
                 await accountRepository.AddAccount(account);
