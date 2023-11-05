@@ -95,6 +95,7 @@ namespace Repositories
                 if (!account.Status)
                 {
                     account.Status = true;
+                    account.BanReason = null;
                     await AccountDAO.Instance.UpdateAccount(account);
 
                     var relatedPosts = PostDAO.Instance.GetAll().Where(p => p.OwnerId == id);

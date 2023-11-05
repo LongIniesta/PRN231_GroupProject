@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Documents\\WorkSpace\\Repos\\prn231_catdogloverplatform\\BE_PRN231_CatDogLover\\BusinessObjects\\BusinessObjects.csproj": {}
+    "D:\\FA23\\PRN231\\New_GroupProject_OData_V2\\PRN231_GroupProject\\BE_PRN231_CatDogLover\\BusinessObjects\\BusinessObjects.csproj": {}
   },
   "projects": {
-    "D:\\Documents\\WorkSpace\\Repos\\prn231_catdogloverplatform\\BE_PRN231_CatDogLover\\BusinessObjects\\BusinessObjects.csproj": {
+    "D:\\FA23\\PRN231\\New_GroupProject_OData_V2\\PRN231_GroupProject\\BE_PRN231_CatDogLover\\BusinessObjects\\BusinessObjects.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Documents\\WorkSpace\\Repos\\prn231_catdogloverplatform\\BE_PRN231_CatDogLover\\BusinessObjects\\BusinessObjects.csproj",
+        "projectUniqueName": "D:\\FA23\\PRN231\\New_GroupProject_OData_V2\\PRN231_GroupProject\\BE_PRN231_CatDogLover\\BusinessObjects\\BusinessObjects.csproj",
         "projectName": "BusinessObjects",
-        "projectPath": "D:\\Documents\\WorkSpace\\Repos\\prn231_catdogloverplatform\\BE_PRN231_CatDogLover\\BusinessObjects\\BusinessObjects.csproj",
-        "packagesPath": "C:\\Users\\hoang\\.nuget\\packages\\",
-        "outputPath": "D:\\Documents\\WorkSpace\\Repos\\prn231_catdogloverplatform\\BE_PRN231_CatDogLover\\BusinessObjects\\obj\\",
+        "projectPath": "D:\\FA23\\PRN231\\New_GroupProject_OData_V2\\PRN231_GroupProject\\BE_PRN231_CatDogLover\\BusinessObjects\\BusinessObjects.csproj",
+        "packagesPath": "C:\\Users\\Hii\\.nuget\\packages\\",
+        "outputPath": "D:\\FA23\\PRN231\\New_GroupProject_OData_V2\\PRN231_GroupProject\\BE_PRN231_CatDogLover\\BusinessObjects\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\hoang\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Hii\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -75,7 +75,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
         }
       }
     }
