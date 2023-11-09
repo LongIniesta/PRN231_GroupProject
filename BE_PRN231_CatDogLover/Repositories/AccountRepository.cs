@@ -35,6 +35,7 @@ namespace Repositories
         {
             try
             {
+                if (AccountDAO.Instance.GetAll().Any(a => a.Email == account.Email && a.AccountId != account.AccountId)) throw new Exception("Email are already use!");
                 var res = await AccountDAO.Instance.UpdateAccount(account);
                 return res;
             }
@@ -69,7 +70,7 @@ namespace Repositories
                     await AccountDAO.Instance.UpdateAccount(account);
                     SendBanNotificationEmail(account.Email, reason, "BAN_REASON");
 
-                    var relatedPosts = PostDAO.Instance.GetAll().Where(p => p.OwnerId == id);
+                    /*var relatedPosts = PostDAO.Instance.GetAll().Where(p => p.OwnerId == id);
                     if (relatedPosts != null)
                     {
                         foreach(var post in relatedPosts) 
@@ -77,7 +78,7 @@ namespace Repositories
                             post.Status = false;
                             PostDAO.Instance.UpdatePost(post);
                         }
-                    }
+                    }*/
                 }
                 else throw new Exception("Account has already been banned!");
             }
@@ -98,7 +99,7 @@ namespace Repositories
                     account.BanReason = null;
                     await AccountDAO.Instance.UpdateAccount(account);
 
-                    var relatedPosts = PostDAO.Instance.GetAll().Where(p => p.OwnerId == id);
+                    /*var relatedPosts = PostDAO.Instance.GetAll().Where(p => p.OwnerId == id);
                     if (relatedPosts != null)
                     {
                         foreach (var post in relatedPosts)
@@ -106,7 +107,7 @@ namespace Repositories
                             post.Status = true;
                             PostDAO.Instance.UpdatePost(post);
                         }
-                    }
+                    }*/
                 }
                 else
                 {

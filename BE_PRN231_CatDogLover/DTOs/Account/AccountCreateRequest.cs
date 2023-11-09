@@ -24,7 +24,6 @@ namespace DTOs.Account
         public string? AvatarLink { get; set; }
         public string? Description { get; set; }
         [Required]
-        [Range(0,2,ErrorMessage ="Unsupported role")]
         public int RoleId { get; set; } = 1;
     }
 }

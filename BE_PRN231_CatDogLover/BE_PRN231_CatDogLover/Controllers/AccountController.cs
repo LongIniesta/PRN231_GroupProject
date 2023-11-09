@@ -104,11 +104,41 @@ namespace BE_PRN231_CatDogLover.Controllers
         /// <param name="request"></param>
         /// <returns></returns>
         //[Authorize(Roles = "admin")]
-        [Authorize]
-        [HttpPost("CreateAccount")]
-        public async Task<ActionResult<AccountDTO>> CreateAccount(AccountCreateRequest request)
+        [Authorize(Policy = "AdminOrStaff")]
+        [HttpPost("CreateUserAccount")]
+        public async Task<ActionResult<AccountDTO>> CreateUserAccount(AccountCreateRequest request)
         {
             if (!ModelState.IsValid) return BadRequest("Data invalid");
+            if (request.RoleId != 3) return BadRequest("RoleId invalid");
+            if (request.PasswordConfirm != request.Password)
+            {
+                return BadRequest("Password not match with confirm");
+            }
+            if (_accountRepository.GetAll().Any(a => a.Email.ToLower().Trim() == request.Email.ToLower().Trim()))
+            {
+                return BadRequest("Email are already exist");
+            }
+            Account account = new Account();
+            try
+            {
+                account = _mapper.Map<Account>(request);
+                account.CreateDate = DateTime.Now;
+                account.Status = true;
+                account.Version = 1;
+                await _accountRepository.AddAccount(account);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            return Created("", _mapper.Map<AccountDTO>(account));
+        }
+        [Authorize(Roles = "admin")]
+        [HttpPost("CreateStaffAccount")]
+        public async Task<ActionResult<AccountDTO>> CreateStaffAccount(AccountCreateRequest request)
+        {
+            if (!ModelState.IsValid) return BadRequest("Data invalid");
+            if (request.RoleId != 2) return BadRequest("RoleId invalid");
             if (request.PasswordConfirm != request.Password)
             {
                 return BadRequest("Password not match with confirm");
